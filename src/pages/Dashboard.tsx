@@ -123,7 +123,6 @@ export default function Dashboard() {
 
       {/* Right Sidebar */}
       <div className="space-y-5">
-        <ActivityWidget />
         <ProgressWidget />
         <DailyTimelineWidget />
       </div>
