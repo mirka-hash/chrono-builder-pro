@@ -4,6 +4,7 @@ import { LineUpCard } from "@/components/dashboard/LineUpCard";
 import { ActivityWidget } from "@/components/dashboard/ActivityWidget";
 import { ProgressWidget } from "@/components/dashboard/ProgressWidget";
 import { WorkingActivityWidget } from "@/components/dashboard/WorkingActivityWidget";
+import { DailyTimelineWidget } from "@/components/dashboard/DailyTimelineWidget";
 
 const lineUpProjects = [
   { project: "Banking app shot", category: "Dribbble", progress: 43, time: "23:00:57", team: ["A"], variant: "peach" as const },
@@ -124,7 +125,7 @@ export default function Dashboard() {
       <div className="space-y-5">
         <ActivityWidget />
         <ProgressWidget />
-        <WorkingActivityWidget />
+        <DailyTimelineWidget />
       </div>
     </div>
   );
