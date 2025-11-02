@@ -54,6 +54,9 @@ All colors MUST be HSL.
     --chart-blue: 210 75% 75%;
     --chart-pink: 340 85% 80%;
 
+    --widget-lime: 75 50% 70%;
+    --widget-pink: 320 65% 80%;
+
     --sidebar-background: 0 0% 98%;
 
     --sidebar-foreground: 240 5.3% 26.1%;

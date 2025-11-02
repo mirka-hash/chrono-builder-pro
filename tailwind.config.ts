@@ -67,6 +67,10 @@ export default {
           blue: "hsl(var(--chart-blue))",
           pink: "hsl(var(--chart-pink))",
         },
+        widget: {
+          lime: "hsl(var(--widget-lime))",
+          pink: "hsl(var(--widget-pink))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
