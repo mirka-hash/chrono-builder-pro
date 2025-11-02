@@ -41,19 +41,19 @@ export default function Dashboard() {
 
         {/* LineUp Section */}
         <div>
-          <h2 className="text-2xl font-bold mb-5 tracking-tight">
-            LineUp <span className="text-xl text-muted-foreground font-semibold">(2)</span>
-          </h2>
+          <div className="flex items-center gap-3 mb-5">
+            <h2 className="text-2xl font-bold tracking-tight">
+              LineUp <span className="text-xl text-muted-foreground font-semibold">(2)</span>
+            </h2>
+            <Button size="sm" className="gap-2 rounded-2xl shadow-sm h-8">
+              <Plus className="w-4 h-4" />
+              Add Task
+            </Button>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {lineUpProjects.map((project, i) => (
               <LineUpCard key={i} {...project} />
             ))}
-            <button className="rounded-3xl border-2 border-dashed border-border/60 hover:border-primary/50 hover:bg-muted/30 transition-all flex items-center justify-center min-h-[160px] group">
-              <div className="text-center">
-                <Plus className="w-10 h-10 mx-auto mb-2 text-muted-foreground group-hover:text-primary group-hover:scale-110 transition-all" strokeWidth={2.5} />
-                <span className="text-sm font-semibold text-muted-foreground group-hover:text-primary transition-colors">Add Task</span>
-              </div>
-            </button>
           </div>
         </div>
 
