@@ -40,17 +40,17 @@ export default function Dashboard() {
 
         {/* LineUp Section */}
         <div>
-          <h2 className="text-2xl font-bold mb-4">
-            LineUp <span className="text-lg text-muted-foreground">(2)</span>
+          <h2 className="text-2xl font-bold mb-5 tracking-tight">
+            LineUp <span className="text-xl text-muted-foreground font-semibold">(2)</span>
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {lineUpProjects.map((project, i) => (
               <LineUpCard key={i} {...project} />
             ))}
-            <button className="rounded-3xl border-2 border-dashed border-border hover:border-primary/40 transition-colors flex items-center justify-center min-h-[140px] group">
+            <button className="rounded-3xl border-2 border-dashed border-border/60 hover:border-primary/50 hover:bg-muted/30 transition-all flex items-center justify-center min-h-[160px] group">
               <div className="text-center">
-                <Plus className="w-8 h-8 mx-auto mb-2 text-muted-foreground group-hover:text-primary transition-colors" />
-                <span className="text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors">Add Task</span>
+                <Plus className="w-10 h-10 mx-auto mb-2 text-muted-foreground group-hover:text-primary group-hover:scale-110 transition-all" strokeWidth={2.5} />
+                <span className="text-sm font-semibold text-muted-foreground group-hover:text-primary transition-colors">Add Task</span>
               </div>
             </button>
           </div>
@@ -58,10 +58,10 @@ export default function Dashboard() {
 
         {/* Trending Section */}
         <div>
-          <h2 className="text-2xl font-bold mb-4">
-            Trending <span className="text-lg text-muted-foreground">(3)</span>
+          <h2 className="text-2xl font-bold mb-5 tracking-tight">
+            Trending <span className="text-xl text-muted-foreground font-semibold">(3)</span>
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {trendingProjects.map((project, i) => (
               <LineUpCard key={i} {...project} />
             ))}
@@ -69,50 +69,50 @@ export default function Dashboard() {
         </div>
 
         {/* My Work Section */}
-        <div className="bg-card rounded-3xl p-6 shadow-sm">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-bold">
-              My Work <span className="text-base text-muted-foreground">(3)</span>
+        <div className="bg-card rounded-3xl p-7 shadow-sm hover:shadow-lg transition-all">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-bold tracking-tight">
+              My Work <span className="text-lg text-muted-foreground font-semibold">(3)</span>
             </h2>
-            <div className="flex items-center gap-4 text-sm">
-              <button className="bg-primary text-primary-foreground px-4 py-2 rounded-2xl font-medium">
-                To do <span className="ml-1">6</span>
+            <div className="flex items-center gap-1 bg-muted/50 rounded-2xl p-1">
+              <button className="bg-primary text-primary-foreground px-4 py-2.5 rounded-xl font-semibold text-sm shadow-sm transition-all hover:scale-105">
+                To do <span className="ml-1.5 bg-white/20 px-1.5 py-0.5 rounded">6</span>
               </button>
-              <button className="text-muted-foreground hover:text-foreground">
+              <button className="text-muted-foreground hover:text-foreground px-3 py-2.5 rounded-xl font-medium text-sm transition-colors hover:bg-background">
                 Comments <span className="ml-1">2</span>
               </button>
-              <button className="text-muted-foreground hover:text-foreground">
+              <button className="text-muted-foreground hover:text-foreground px-3 py-2.5 rounded-xl font-medium text-sm transition-colors hover:bg-background">
                 Done <span className="ml-1">15</span>
               </button>
-              <button className="text-muted-foreground hover:text-foreground">
+              <button className="text-muted-foreground hover:text-foreground px-3 py-2.5 rounded-xl font-medium text-sm transition-colors hover:bg-background">
                 Delegate <span className="ml-1">4</span>
               </button>
             </div>
           </div>
           
-          <div className="space-y-3">
+          <div className="space-y-2">
             {[
               { task: "Dribbble: Banking app shot", path: "Publications / Shots / Dribbble", id: "3/19", date: "July 22" },
               { task: "Behance: Mobile delivery app", path: "Publications / Shots / Behance", id: "1/8", date: "July 24" },
               { task: "Event: User research methods", path: "Internal / Events / Design", id: "2/14", date: "July 26" },
             ].map((item, i) => (
-              <div key={i} className="flex items-center gap-4 p-3 rounded-2xl hover:bg-muted/40 transition-colors">
+              <div key={i} className="flex items-center gap-4 p-4 rounded-2xl hover:bg-muted/40 transition-all border border-transparent hover:border-border/40 cursor-pointer group">
                 <div className="flex-1">
-                  <p className="text-xs text-muted-foreground mb-1">{item.path}</p>
-                  <p className="text-sm font-bold">{item.task}</p>
+                  <p className="text-xs text-muted-foreground font-medium mb-1.5">{item.path}</p>
+                  <p className="text-sm font-bold group-hover:text-primary transition-colors">{item.task}</p>
                 </div>
-                <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                  <span>{item.id}</span>
+                <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                  <span className="font-semibold bg-muted px-2 py-1 rounded-lg">{item.id}</span>
                   <div className="flex -space-x-2">
                     {["A", "B", "C"].slice(0, i + 2).map((letter, j) => (
-                      <div key={j} className="w-6 h-6 rounded-full bg-chart-peach border-2 border-white flex items-center justify-center text-xs font-bold text-primary">
+                      <div key={j} className="w-7 h-7 rounded-full bg-chart-peach border-[3px] border-white flex items-center justify-center text-xs font-bold text-primary shadow-sm hover:scale-110 hover:z-10 transition-transform">
                         {letter}
                       </div>
                     ))}
-                    {i === 2 && <div className="w-6 h-6 rounded-full bg-muted border-2 border-white flex items-center justify-center text-xs font-bold">+3</div>}
+                    {i === 2 && <div className="w-7 h-7 rounded-full bg-muted border-[3px] border-white flex items-center justify-center text-xs font-bold shadow-sm hover:scale-110 hover:z-10 transition-transform">+3</div>}
                   </div>
-                  <span>{item.date}</span>
-                  <button className="text-muted-foreground hover:text-foreground">⋯</button>
+                  <span className="font-medium">{item.date}</span>
+                  <button className="text-muted-foreground hover:text-foreground font-bold text-lg transition-colors">⋯</button>
                 </div>
               </div>
             ))}
@@ -121,7 +121,7 @@ export default function Dashboard() {
       </div>
 
       {/* Right Sidebar */}
-      <div className="space-y-4">
+      <div className="space-y-5">
         <ActivityWidget />
         <ProgressWidget />
         <WorkingActivityWidget />
