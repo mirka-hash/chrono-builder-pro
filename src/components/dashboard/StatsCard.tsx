@@ -29,14 +29,14 @@ export function StatsCard({
   };
 
   return (
-    <div className="bg-card rounded-2xl p-6 card-shadow hover:card-shadow-lg transition-all duration-300">
-      <div className="flex items-start justify-between mb-4">
-        <div className={cn("w-12 h-12 rounded-xl flex items-center justify-center", gradientClasses[gradient])}>
-          <Icon className="w-6 h-6 text-primary" />
+    <div className="bg-card rounded-3xl p-7 card-shadow card-hover">
+      <div className="flex items-start justify-between mb-5">
+        <div className={cn("w-14 h-14 rounded-2xl flex items-center justify-center shadow-sm", gradientClasses[gradient])}>
+          <Icon className="w-7 h-7 text-primary" strokeWidth={2.5} />
         </div>
         {trend && (
           <span className={cn(
-            "text-sm font-medium px-2 py-1 rounded-lg",
+            "text-sm font-semibold px-3 py-1.5 rounded-xl",
             trend.isPositive ? "bg-success text-success-foreground" : "bg-destructive/10 text-destructive"
           )}>
             {trend.isPositive ? "+" : ""}{trend.value}
@@ -45,10 +45,10 @@ export function StatsCard({
       </div>
       
       <div>
-        <p className="text-sm text-muted-foreground mb-1">{title}</p>
-        <p className="text-3xl font-bold mb-1">{value}</p>
+        <p className="text-sm font-medium text-muted-foreground mb-2">{title}</p>
+        <p className="text-4xl font-bold tracking-tight mb-1">{value}</p>
         {subtitle && (
-          <p className="text-xs text-muted-foreground">{subtitle}</p>
+          <p className="text-sm text-muted-foreground mt-1">{subtitle}</p>
         )}
       </div>
     </div>

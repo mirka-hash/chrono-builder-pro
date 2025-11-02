@@ -43,26 +43,26 @@ const mockProjects = [
 
 export function ProjectsList() {
   return (
-    <div className="bg-card rounded-2xl p-6 card-shadow">
+    <div className="bg-card rounded-3xl p-7 card-shadow card-hover">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-semibold">Active Projects</h2>
-        <Button variant="outline" size="sm">View All</Button>
+        <h2 className="text-xl font-bold">Active Projects</h2>
+        <Button variant="outline" size="sm" className="rounded-2xl">View All</Button>
       </div>
 
       <div className="space-y-4">
         {mockProjects.map((project) => (
           <div
             key={project.id}
-            className="flex items-start gap-4 p-4 rounded-xl hover:bg-muted/50 transition-colors group border border-border"
+            className="flex items-start gap-4 p-5 rounded-2xl hover:bg-muted/40 transition-all group border border-border/60"
           >
-            <div className={`w-12 h-12 rounded-xl gradient-${project.color} flex items-center justify-center flex-shrink-0`}>
-              <FolderKanban className="w-6 h-6 text-primary" />
+            <div className={`w-14 h-14 rounded-2xl gradient-${project.color} flex items-center justify-center flex-shrink-0 shadow-sm`}>
+              <FolderKanban className="w-6 h-6 text-primary" strokeWidth={2.5} />
             </div>
 
             <div className="flex-1 min-w-0">
               <div className="flex items-start justify-between gap-2 mb-3">
                 <div>
-                  <h3 className="font-semibold mb-1">{project.name}</h3>
+                  <h3 className="font-bold text-base mb-0.5">{project.name}</h3>
                   <p className="text-sm text-muted-foreground">{project.client}</p>
                 </div>
                 <DropdownMenu>
@@ -70,7 +70,7 @@ export function ProjectsList() {
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="opacity-0 group-hover:opacity-100 transition-opacity"
+                      className="opacity-0 group-hover:opacity-100 transition-opacity rounded-xl"
                     >
                       <MoreVertical className="w-4 h-4" />
                     </Button>
@@ -85,17 +85,17 @@ export function ProjectsList() {
 
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-muted-foreground">Progress</span>
-                  <span className="font-medium">{project.progress}%</span>
+                  <span className="text-muted-foreground font-medium">Progress</span>
+                  <span className="font-semibold">{project.progress}%</span>
                 </div>
-                <Progress value={project.progress} className="h-2" />
+                <Progress value={project.progress} className="h-2.5" />
 
                 <div className="flex items-center justify-between text-sm pt-2">
-                  <div className="flex items-center gap-1">
-                    <TrendingUp className="w-4 h-4 text-success-foreground" />
-                    <span className="text-muted-foreground">{project.hours}h logged</span>
+                  <div className="flex items-center gap-1.5">
+                    <TrendingUp className="w-4 h-4 text-success-foreground" strokeWidth={2.5} />
+                    <span className="text-muted-foreground font-medium">{project.hours}h logged</span>
                   </div>
-                  <span className="text-muted-foreground">{project.budget}h budget</span>
+                  <span className="text-muted-foreground font-medium">{project.budget}h budget</span>
                 </div>
               </div>
             </div>

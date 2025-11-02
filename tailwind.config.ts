@@ -65,6 +65,7 @@ export default {
           lime: "hsl(var(--chart-lime))",
           amber: "hsl(var(--chart-amber))",
           blue: "hsl(var(--chart-blue))",
+          pink: "hsl(var(--chart-pink))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",

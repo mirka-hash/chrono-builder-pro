@@ -42,36 +42,36 @@ const mockEntries = [
 
 export function TimeEntriesList() {
   return (
-    <div className="bg-card rounded-2xl p-6 card-shadow">
+    <div className="bg-card rounded-3xl p-7 card-shadow card-hover">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-semibold">Recent Time Entries</h2>
-        <Button variant="outline" size="sm">View All</Button>
+        <h2 className="text-xl font-bold">Recent Time Entries</h2>
+        <Button variant="outline" size="sm" className="rounded-2xl">View All</Button>
       </div>
 
       <div className="space-y-3">
         {mockEntries.map((entry) => (
           <div
             key={entry.id}
-            className="flex items-start gap-4 p-4 rounded-xl hover:bg-muted/50 transition-colors group"
+            className="flex items-start gap-4 p-5 rounded-2xl hover:bg-muted/40 transition-all group"
           >
-            <div className={`w-10 h-10 rounded-lg gradient-${entry.color} flex items-center justify-center flex-shrink-0`}>
-              <Clock className="w-5 h-5 text-primary" />
+            <div className={`w-12 h-12 rounded-2xl gradient-${entry.color} flex items-center justify-center flex-shrink-0 shadow-sm`}>
+              <Clock className="w-5 h-5 text-primary" strokeWidth={2.5} />
             </div>
 
             <div className="flex-1 min-w-0">
               <div className="flex items-start justify-between gap-2 mb-1">
                 <div>
-                  <h3 className="font-semibold text-sm">{entry.project}</h3>
+                  <h3 className="font-bold text-sm">{entry.project}</h3>
                   <p className="text-sm text-muted-foreground">{entry.client}</p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-medium">{entry.duration}h</span>
+                  <span className="text-sm font-bold">{entry.duration}h</span>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="opacity-0 group-hover:opacity-100 transition-opacity"
+                        className="opacity-0 group-hover:opacity-100 transition-opacity rounded-xl"
                       >
                         <MoreVertical className="w-4 h-4" />
                       </Button>
@@ -86,7 +86,7 @@ export function TimeEntriesList() {
               </div>
               <p className="text-sm text-muted-foreground mb-2">{entry.description}</p>
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                <span className="px-2 py-1 bg-muted rounded">{entry.activity}</span>
+                <span className="px-2.5 py-1 bg-muted rounded-xl font-medium">{entry.activity}</span>
                 <span>{entry.date}</span>
               </div>
             </div>

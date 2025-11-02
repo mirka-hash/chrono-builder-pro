@@ -21,13 +21,13 @@ export function TimeEntryForm() {
   const [isTracking, setIsTracking] = useState(false);
 
   return (
-    <div className="bg-card rounded-2xl p-6 card-shadow">
+    <div className="bg-card rounded-3xl p-7 card-shadow">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-semibold">New Time Entry</h2>
+        <h2 className="text-xl font-bold">New Time Entry</h2>
         <Button
           onClick={() => setIsTracking(!isTracking)}
           className={cn(
-            "gap-2",
+            "gap-2 rounded-2xl shadow-sm",
             isTracking && "bg-destructive hover:bg-destructive/90"
           )}
         >
@@ -122,20 +122,20 @@ export function TimeEntryForm() {
 
         <div className="space-y-2">
           <Label>Duration (hours)</Label>
-          <Input type="number" placeholder="0.00" step="0.25" />
+          <Input type="number" placeholder="0.00" step="0.25" className="rounded-xl" />
         </div>
 
         <div className="space-y-2">
           <Label>Description</Label>
           <Textarea
             placeholder="What did you work on?"
-            className="min-h-[100px]"
+            className="min-h-[100px] rounded-xl"
           />
         </div>
 
         <div className="flex gap-3 pt-2">
-          <Button className="flex-1">Save Entry</Button>
-          <Button variant="outline" className="flex-1">Cancel</Button>
+          <Button className="flex-1 rounded-2xl shadow-sm">Save Entry</Button>
+          <Button variant="outline" className="flex-1 rounded-2xl">Cancel</Button>
         </div>
       </div>
     </div>
