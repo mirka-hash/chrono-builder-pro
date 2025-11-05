@@ -1,5 +1,6 @@
 import { FolderKanban, MoreVertical, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -42,6 +43,8 @@ const mockProjects = [
 ];
 
 export function ProjectsList() {
+  const navigate = useNavigate();
+
   return (
     <div className="bg-card rounded-3xl p-7 card-shadow card-hover">
       <div className="flex items-center justify-between mb-6">
@@ -53,7 +56,8 @@ export function ProjectsList() {
         {mockProjects.map((project) => (
           <div
             key={project.id}
-            className="flex items-start gap-4 p-5 rounded-2xl hover:bg-muted/40 transition-all group border border-border/60"
+            onClick={() => navigate(`/projects/${project.id}`)}
+            className="flex items-start gap-4 p-5 rounded-2xl hover:bg-muted/40 transition-all group border border-border/60 cursor-pointer"
           >
             <div className={`w-14 h-14 rounded-2xl gradient-${project.color} flex items-center justify-center flex-shrink-0 shadow-sm`}>
               <FolderKanban className="w-6 h-6 text-primary" strokeWidth={2.5} />
@@ -76,9 +80,9 @@ export function ProjectsList() {
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
-                    <DropdownMenuItem>Edit Project</DropdownMenuItem>
-                    <DropdownMenuItem>View Details</DropdownMenuItem>
-                    <DropdownMenuItem>Archive</DropdownMenuItem>
+                    <DropdownMenuItem onClick={(e) => { e.stopPropagation(); }}>Edit Project</DropdownMenuItem>
+                    <DropdownMenuItem onClick={(e) => { e.stopPropagation(); navigate(`/projects/${project.id}`); }}>View Details</DropdownMenuItem>
+                    <DropdownMenuItem onClick={(e) => { e.stopPropagation(); }}>Archive</DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </div>

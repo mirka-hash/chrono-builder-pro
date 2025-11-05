@@ -1,6 +1,7 @@
 import { ExternalLink, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LineUpCard } from "@/components/dashboard/LineUpCard";
+import { useNavigate } from "react-router-dom";
 import { ActivityWidget } from "@/components/dashboard/ActivityWidget";
 import { ProgressWidget } from "@/components/dashboard/ProgressWidget";
 import { WorkingActivityWidget } from "@/components/dashboard/WorkingActivityWidget";
@@ -18,6 +19,8 @@ const trendingProjects = [
 ];
 
 export default function Dashboard() {
+  const navigate = useNavigate();
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6 animate-fade-in">
       {/* Main Content */}
@@ -52,7 +55,7 @@ export default function Dashboard() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {lineUpProjects.map((project, i) => (
-              <LineUpCard key={i} {...project} />
+              <LineUpCard key={i} {...project} onClick={() => navigate(`/projects/${i + 1}`)} />
             ))}
           </div>
         </div>
@@ -64,7 +67,7 @@ export default function Dashboard() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {trendingProjects.map((project, i) => (
-              <LineUpCard key={i} {...project} />
+              <LineUpCard key={i} {...project} onClick={() => navigate(`/projects/${i + 3}`)} />
             ))}
           </div>
         </div>

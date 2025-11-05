@@ -8,6 +8,7 @@ import { Header } from "@/components/layout/Header";
 import Dashboard from "./pages/Dashboard";
 import TimeTracking from "./pages/TimeTracking";
 import Projects from "./pages/Projects";
+import ProjectDetail from "./pages/ProjectDetail";
 import Clients from "./pages/Clients";
 import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
@@ -30,6 +31,7 @@ const App = () => (
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/time-tracking" element={<TimeTracking />} />
                 <Route path="/projects" element={<Projects />} />
+                <Route path="/projects/:id" element={<ProjectDetail />} />
                 <Route path="/clients" element={<Clients />} />
                 <Route path="/reports" element={<Reports />} />
                 <Route path="/settings" element={<Settings />} />

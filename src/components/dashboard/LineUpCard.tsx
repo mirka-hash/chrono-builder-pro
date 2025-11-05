@@ -9,9 +9,10 @@ interface LineUpCardProps {
   time: string;
   team: string[];
   variant: "peach" | "lavender" | "lime" | "amber";
+  onClick?: () => void;
 }
 
-export function LineUpCard({ project, category, progress, time, team, variant }: LineUpCardProps) {
+export function LineUpCard({ project, category, progress, time, team, variant, onClick }: LineUpCardProps) {
   const gradientClasses = {
     peach: "gradient-peach",
     lavender: "gradient-lavender",
@@ -27,10 +28,13 @@ export function LineUpCard({ project, category, progress, time, team, variant }:
   ];
 
   return (
-    <div className={cn(
-      "rounded-3xl p-6 shadow-sm transition-all hover:shadow-lg hover:-translate-y-0.5 cursor-pointer",
-      gradientClasses[variant]
-    )}>
+    <div 
+      onClick={onClick}
+      className={cn(
+        "rounded-3xl p-6 shadow-sm transition-all hover:shadow-lg hover:-translate-y-0.5 cursor-pointer",
+        gradientClasses[variant]
+      )}
+    >
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1">
           <p className="text-xs text-primary/70 font-semibold mb-1.5 tracking-wide uppercase">{category}</p>
