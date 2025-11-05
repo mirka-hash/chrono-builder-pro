@@ -79,61 +79,69 @@ export default function ProjectDetail() {
 
       {/* Key Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
-        <Card className="bg-card rounded-3xl card-shadow">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 rounded-2xl gradient-peach flex items-center justify-center">
-                <TrendingUp className="w-6 h-6 text-primary" />
-              </div>
-              <span className="text-2xl font-bold">{projectData.progress}%</span>
+        <div className="bg-card rounded-3xl card-shadow card-hover gradient-peach p-6">
+          <div className="flex items-center justify-between mb-4">
+            <div className="w-12 h-12 rounded-2xl bg-white/40 backdrop-blur-sm flex items-center justify-center shadow-sm">
+              <TrendingUp className="w-6 h-6 text-primary" />
             </div>
-            <p className="text-sm font-medium text-muted-foreground">Progress</p>
-            <Progress value={projectData.progress} className="mt-3 h-2" />
-          </CardContent>
-        </Card>
+            <span className="text-3xl font-bold text-primary">{projectData.progress}%</span>
+          </div>
+          <p className="text-sm font-semibold text-primary/80 mb-3">Project Progress</p>
+          <div className="h-2.5 bg-white/30 rounded-full overflow-hidden">
+            <div 
+              className="h-full bg-primary rounded-full transition-all duration-500"
+              style={{ width: `${projectData.progress}%` }}
+            />
+          </div>
+        </div>
 
-        <Card className="bg-card rounded-3xl card-shadow">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 rounded-2xl gradient-lime flex items-center justify-center">
-                <CheckCircle2 className="w-6 h-6 text-primary" />
-              </div>
-              <span className="text-2xl font-bold">{projectData.stats.completed}/{projectData.stats.totalTasks}</span>
+        <div className="bg-card rounded-3xl card-shadow card-hover gradient-lime p-6">
+          <div className="flex items-center justify-between mb-4">
+            <div className="w-12 h-12 rounded-2xl bg-white/40 backdrop-blur-sm flex items-center justify-center shadow-sm">
+              <CheckCircle2 className="w-6 h-6 text-primary" />
             </div>
-            <p className="text-sm font-medium text-muted-foreground">Tasks Completed</p>
-            <div className="flex gap-2 mt-3">
-              <Badge variant="secondary" className="text-xs">{projectData.stats.inProgress} active</Badge>
-            </div>
-          </CardContent>
-        </Card>
+            <span className="text-3xl font-bold text-primary">{projectData.stats.completed}/{projectData.stats.totalTasks}</span>
+          </div>
+          <p className="text-sm font-semibold text-primary/80 mb-3">Tasks Completed</p>
+          <div className="flex gap-2">
+            <Badge className="bg-white/40 text-primary border-0 text-xs font-semibold">{projectData.stats.inProgress} active</Badge>
+            <Badge className="bg-white/40 text-primary border-0 text-xs font-semibold">{projectData.stats.pending} pending</Badge>
+          </div>
+        </div>
 
-        <Card className="bg-card rounded-3xl card-shadow">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 rounded-2xl gradient-amber flex items-center justify-center">
-                <Clock className="w-6 h-6 text-primary" />
-              </div>
-              <span className="text-2xl font-bold">{projectData.stats.hoursLogged}h</span>
+        <div className="bg-card rounded-3xl card-shadow card-hover gradient-amber p-6">
+          <div className="flex items-center justify-between mb-4">
+            <div className="w-12 h-12 rounded-2xl bg-white/40 backdrop-blur-sm flex items-center justify-center shadow-sm">
+              <Clock className="w-6 h-6 text-primary" />
             </div>
-            <p className="text-sm font-medium text-muted-foreground">Hours Logged</p>
-            <Progress value={timePercentage} className="mt-3 h-2" />
-            <p className="text-xs text-muted-foreground mt-1">of {projectData.stats.estimatedHours}h estimated</p>
-          </CardContent>
-        </Card>
+            <span className="text-3xl font-bold text-primary">{projectData.stats.hoursLogged}h</span>
+          </div>
+          <p className="text-sm font-semibold text-primary/80 mb-3">Hours Logged</p>
+          <div className="h-2.5 bg-white/30 rounded-full overflow-hidden">
+            <div 
+              className="h-full bg-primary rounded-full transition-all duration-500"
+              style={{ width: `${timePercentage}%` }}
+            />
+          </div>
+          <p className="text-xs text-primary/70 mt-2 font-medium">of {projectData.stats.estimatedHours}h estimated</p>
+        </div>
 
-        <Card className="bg-card rounded-3xl card-shadow">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 rounded-2xl gradient-lavender flex items-center justify-center">
-                <DollarSign className="w-6 h-6 text-primary" />
-              </div>
-              <span className="text-2xl font-bold">{projectData.spent}</span>
+        <div className="bg-card rounded-3xl card-shadow card-hover gradient-lavender p-6">
+          <div className="flex items-center justify-between mb-4">
+            <div className="w-12 h-12 rounded-2xl bg-white/40 backdrop-blur-sm flex items-center justify-center shadow-sm">
+              <DollarSign className="w-6 h-6 text-primary" />
             </div>
-            <p className="text-sm font-medium text-muted-foreground">Budget Spent</p>
-            <Progress value={budgetPercentage} className="mt-3 h-2" />
-            <p className="text-xs text-muted-foreground mt-1">of {projectData.budget} budget</p>
-          </CardContent>
-        </Card>
+            <span className="text-3xl font-bold text-primary">{projectData.spent}</span>
+          </div>
+          <p className="text-sm font-semibold text-primary/80 mb-3">Budget Spent</p>
+          <div className="h-2.5 bg-white/30 rounded-full overflow-hidden">
+            <div 
+              className="h-full bg-primary rounded-full transition-all duration-500"
+              style={{ width: `${budgetPercentage}%` }}
+            />
+          </div>
+          <p className="text-xs text-primary/70 mt-2 font-medium">of {projectData.budget} budget</p>
+        </div>
       </div>
 
       {/* Main Content Grid */}
@@ -141,29 +149,29 @@ export default function ProjectDetail() {
         {/* Left Column - Tasks & Timeline */}
         <div className="lg:col-span-2 space-y-6">
           {/* Project Overview */}
-          <Card className="bg-card rounded-3xl card-shadow">
+          <Card className="bg-card rounded-3xl card-shadow card-hover border-0">
             <CardHeader>
               <CardTitle className="text-xl">Project Overview</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <p className="text-sm text-muted-foreground">{projectData.description}</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">{projectData.description}</p>
               <div className="grid grid-cols-2 gap-4 pt-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center">
+                <div className="flex items-center gap-3 p-4 rounded-2xl gradient-lime">
+                  <div className="w-10 h-10 rounded-xl bg-white/40 backdrop-blur-sm flex items-center justify-center shadow-sm">
                     <Calendar className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <p className="text-xs text-muted-foreground">Start Date</p>
-                    <p className="text-sm font-semibold">{projectData.startDate}</p>
+                    <p className="text-xs text-primary/70 font-medium">Start Date</p>
+                    <p className="text-sm font-bold text-primary">{projectData.startDate}</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-warning flex items-center justify-center">
+                <div className="flex items-center gap-3 p-4 rounded-2xl gradient-pink">
+                  <div className="w-10 h-10 rounded-xl bg-white/40 backdrop-blur-sm flex items-center justify-center shadow-sm">
                     <Calendar className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <p className="text-xs text-muted-foreground">Deadline</p>
-                    <p className="text-sm font-semibold">{projectData.deadline}</p>
+                    <p className="text-xs text-primary/70 font-medium">Deadline</p>
+                    <p className="text-sm font-bold text-primary">{projectData.deadline}</p>
                   </div>
                 </div>
               </div>
@@ -171,35 +179,44 @@ export default function ProjectDetail() {
           </Card>
 
           {/* Task Status */}
-          <Card className="bg-card rounded-3xl card-shadow">
+          <Card className="bg-card rounded-3xl card-shadow card-hover border-0">
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle className="text-xl">Task Status</CardTitle>
-              <Button variant="ghost" size="sm">View All</Button>
+              <Button variant="secondary" size="sm" className="rounded-xl">View All</Button>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                {projectData.tasks.map((task) => (
-                  <div key={task.id} className="flex items-center justify-between p-4 rounded-2xl bg-muted/30 hover:bg-muted/50 transition-colors">
-                    <div className="flex items-center gap-3 flex-1">
-                      {task.status === "completed" ? (
-                        <CheckCircle2 className="w-5 h-5 text-success-foreground" />
-                      ) : task.status === "in-progress" ? (
-                        <Circle className="w-5 h-5 text-chart-blue" />
-                      ) : (
-                        <AlertCircle className="w-5 h-5 text-muted-foreground" />
-                      )}
-                      <div className="flex-1">
-                        <p className="text-sm font-medium">{task.title}</p>
-                        <p className="text-xs text-muted-foreground">Due: {task.date}</p>
+                {projectData.tasks.map((task, index) => {
+                  const gradients = ["gradient-lime", "gradient-blue", "gradient-peach", "gradient-lavender", "gradient-amber"];
+                  return (
+                    <div key={task.id} className={`flex items-center justify-between p-4 rounded-2xl ${gradients[index % gradients.length]} hover:scale-[1.02] transition-all cursor-pointer`}>
+                      <div className="flex items-center gap-3 flex-1">
+                        {task.status === "completed" ? (
+                          <div className="w-8 h-8 rounded-xl bg-white/40 backdrop-blur-sm flex items-center justify-center">
+                            <CheckCircle2 className="w-5 h-5 text-primary" />
+                          </div>
+                        ) : task.status === "in-progress" ? (
+                          <div className="w-8 h-8 rounded-xl bg-white/40 backdrop-blur-sm flex items-center justify-center">
+                            <Circle className="w-5 h-5 text-primary" />
+                          </div>
+                        ) : (
+                          <div className="w-8 h-8 rounded-xl bg-white/40 backdrop-blur-sm flex items-center justify-center">
+                            <AlertCircle className="w-5 h-5 text-primary" />
+                          </div>
+                        )}
+                        <div className="flex-1">
+                          <p className="text-sm font-semibold text-primary">{task.title}</p>
+                          <p className="text-xs text-primary/70 font-medium">Due: {task.date}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Avatar className="w-8 h-8 border-2 border-white/60">
+                          <AvatarFallback className="text-xs font-bold text-primary bg-white/40">{task.assignee}</AvatarFallback>
+                        </Avatar>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Avatar className="w-7 h-7">
-                        <AvatarFallback className="text-xs">{task.assignee}</AvatarFallback>
-                      </Avatar>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </CardContent>
           </Card>
@@ -231,87 +248,107 @@ export default function ProjectDetail() {
         {/* Right Column - Team & Stats */}
         <div className="space-y-6">
           {/* Team Members */}
-          <Card className="bg-card rounded-3xl card-shadow">
+          <Card className="bg-card rounded-3xl card-shadow card-hover border-0">
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle className="text-xl">Team</CardTitle>
-              <Button variant="ghost" size="sm">
+              <Button variant="secondary" size="sm" className="rounded-xl">
                 <Users className="w-4 h-4" />
               </Button>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                {projectData.team.map((member, index) => (
-                  <div key={index} className="flex items-center gap-3">
-                    <Avatar className="w-11 h-11">
-                      <AvatarImage src={member.avatar} />
-                      <AvatarFallback className="gradient-peach text-sm font-semibold text-primary">
-                        {member.initials}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div className="flex-1">
-                      <p className="text-sm font-semibold">{member.name}</p>
-                      <p className="text-xs text-muted-foreground">{member.role}</p>
+              <div className="space-y-3">
+                {projectData.team.map((member, index) => {
+                  const gradients = ["gradient-peach", "gradient-lavender", "gradient-lime", "gradient-amber"];
+                  return (
+                    <div key={index} className={`flex items-center gap-3 p-3 rounded-2xl ${gradients[index % gradients.length]} hover:scale-[1.02] transition-all cursor-pointer`}>
+                      <Avatar className="w-11 h-11 border-2 border-white/60">
+                        <AvatarImage src={member.avatar} />
+                        <AvatarFallback className="bg-white/40 text-sm font-bold text-primary">
+                          {member.initials}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div className="flex-1">
+                        <p className="text-sm font-bold text-primary">{member.name}</p>
+                        <p className="text-xs text-primary/70 font-medium">{member.role}</p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </CardContent>
           </Card>
 
           {/* Task Distribution */}
-          <Card className="bg-card rounded-3xl card-shadow">
+          <Card className="bg-card rounded-3xl card-shadow card-hover gradient-blue border-0">
             <CardHeader>
-              <CardTitle className="text-xl">Task Distribution</CardTitle>
+              <CardTitle className="text-xl text-primary">Task Distribution</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-success" />
+                <div className="p-4 rounded-2xl bg-white/30 backdrop-blur-sm">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-sm font-semibold flex items-center gap-2 text-primary">
+                      <div className="w-3 h-3 rounded-full bg-success-foreground" />
                       Completed
                     </span>
-                    <span className="text-sm font-semibold">{projectData.stats.completed}</span>
+                    <span className="text-sm font-bold text-primary">{projectData.stats.completed}</span>
                   </div>
-                  <Progress value={(projectData.stats.completed / projectData.stats.totalTasks) * 100} className="h-2" />
+                  <div className="h-2.5 bg-white/30 rounded-full overflow-hidden">
+                    <div 
+                      className="h-full bg-success-foreground rounded-full transition-all duration-500"
+                      style={{ width: `${(projectData.stats.completed / projectData.stats.totalTasks) * 100}%` }}
+                    />
+                  </div>
                 </div>
 
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-chart-blue" />
+                <div className="p-4 rounded-2xl bg-white/30 backdrop-blur-sm">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-sm font-semibold flex items-center gap-2 text-primary">
+                      <div className="w-3 h-3 rounded-full bg-chart-amber" />
                       In Progress
                     </span>
-                    <span className="text-sm font-semibold">{projectData.stats.inProgress}</span>
+                    <span className="text-sm font-bold text-primary">{projectData.stats.inProgress}</span>
                   </div>
-                  <Progress value={(projectData.stats.inProgress / projectData.stats.totalTasks) * 100} className="h-2" />
+                  <div className="h-2.5 bg-white/30 rounded-full overflow-hidden">
+                    <div 
+                      className="h-full bg-chart-amber rounded-full transition-all duration-500"
+                      style={{ width: `${(projectData.stats.inProgress / projectData.stats.totalTasks) * 100}%` }}
+                    />
+                  </div>
                 </div>
 
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-muted" />
+                <div className="p-4 rounded-2xl bg-white/30 backdrop-blur-sm">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-sm font-semibold flex items-center gap-2 text-primary">
+                      <div className="w-3 h-3 rounded-full bg-muted-foreground" />
                       Pending
                     </span>
-                    <span className="text-sm font-semibold">{projectData.stats.pending}</span>
+                    <span className="text-sm font-bold text-primary">{projectData.stats.pending}</span>
                   </div>
-                  <Progress value={(projectData.stats.pending / projectData.stats.totalTasks) * 100} className="h-2" />
+                  <div className="h-2.5 bg-white/30 rounded-full overflow-hidden">
+                    <div 
+                      className="h-full bg-muted-foreground rounded-full transition-all duration-500"
+                      style={{ width: `${(projectData.stats.pending / projectData.stats.totalTasks) * 100}%` }}
+                    />
+                  </div>
                 </div>
               </div>
             </CardContent>
           </Card>
 
           {/* Time Tracking Summary */}
-          <Card className="bg-card rounded-3xl card-shadow gradient-blue">
+          <Card className="bg-card rounded-3xl card-shadow card-hover gradient-pink border-0">
             <CardContent className="p-6">
               <div className="text-center">
-                <Clock className="w-12 h-12 mx-auto mb-4 text-primary" />
-                <h3 className="text-3xl font-bold mb-2">{projectData.stats.hoursLogged}h</h3>
-                <p className="text-sm text-muted-foreground mb-1">Total Time Logged</p>
-                <p className="text-xs text-muted-foreground">
+                <div className="w-16 h-16 rounded-2xl bg-white/40 backdrop-blur-sm flex items-center justify-center mx-auto mb-4 shadow-sm">
+                  <Clock className="w-10 h-10 text-primary" />
+                </div>
+                <h3 className="text-4xl font-bold mb-2 text-primary">{projectData.stats.hoursLogged}h</h3>
+                <p className="text-sm text-primary/80 mb-1 font-semibold">Total Time Logged</p>
+                <p className="text-xs text-primary/70 font-medium mb-4">
                   {((projectData.stats.hoursLogged / projectData.stats.estimatedHours) * 100).toFixed(0)}% of estimated time
                 </p>
-                <Button variant="secondary" size="sm" className="mt-4">
+                <Button className="rounded-xl shadow-sm bg-white/40 text-primary hover:bg-white/60 border-0 backdrop-blur-sm font-semibold">
                   Log Time
                 </Button>
               </div>
