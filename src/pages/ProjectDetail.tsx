@@ -1,11 +1,17 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Calendar, Clock, DollarSign, Users, TrendingUp, CheckCircle2, Circle, AlertCircle } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, DollarSign, Users, TrendingUp, CheckCircle2, Circle, AlertCircle, Plus, Settings, Pencil, FolderKanban, UserPlus } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 // Mock data - in real app, fetch based on project ID
 const projectData = {
   name: "Website Redesign",
@@ -74,7 +80,38 @@ export default function ProjectDetail() {
             </div>
           </div>
         </div>
-        <Button>Edit Project</Button>
+        <div className="flex items-center gap-2">
+          <Button className="gap-2">
+            <Plus className="w-4 h-4" />
+            Add Task
+          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" size="icon">
+                <Settings className="w-4 h-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-48">
+              <DropdownMenuItem className="gap-2 cursor-pointer">
+                <Pencil className="w-4 h-4" />
+                Edit Project
+              </DropdownMenuItem>
+              <DropdownMenuItem className="gap-2 cursor-pointer">
+                <UserPlus className="w-4 h-4" />
+                Add Team Member
+              </DropdownMenuItem>
+              <DropdownMenuItem className="gap-2 cursor-pointer">
+                <FolderKanban className="w-4 h-4" />
+                Manage Workspace
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem className="gap-2 cursor-pointer">
+                <Clock className="w-4 h-4" />
+                Log Time
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
 
       {/* Key Metrics */}
