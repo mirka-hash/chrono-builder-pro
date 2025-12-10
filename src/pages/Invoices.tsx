@@ -19,7 +19,11 @@ import {
   Trash2, 
   RefreshCw,
   Building2,
-  User
+  X,
+  Pencil,
+  Mail,
+  Phone,
+  MapPin
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -38,12 +42,6 @@ const timeEntries = [
   { id: "5", projectId: "2", description: "UI components", hours: 8, date: "2024-11-21", rate: 175 },
 ];
 
-const mockInvoices = [
-  { id: "INV-001", client: "Acme Corp", project: "Website Redesign", amount: 2700, date: "2024-11-25", status: "sent" },
-  { id: "INV-002", client: "TechStart", project: "Mobile App", amount: 3150, date: "2024-11-20", status: "paid" },
-  { id: "INV-003", client: "StyleCo", project: "Brand Identity", amount: 1875, date: "2024-11-15", status: "draft" },
-];
-
 interface LineItem {
   id: string;
   description: string;
@@ -51,9 +49,73 @@ interface LineItem {
   rate: number;
 }
 
+interface Invoice {
+  id: string;
+  client: string;
+  clientEmail: string;
+  clientAddress: string;
+  project: string;
+  amount: number;
+  date: string;
+  dueDate: string;
+  status: string;
+  items: LineItem[];
+}
+
+const mockInvoices: Invoice[] = [
+  { 
+    id: "INV-001", 
+    client: "Acme Corp", 
+    clientEmail: "billing@acmecorp.com",
+    clientAddress: "123 Business Ave, New York, NY 10001",
+    project: "Website Redesign", 
+    amount: 2700, 
+    date: "2024-11-25", 
+    dueDate: "2024-12-25",
+    status: "sent",
+    items: [
+      { id: "1", description: "Homepage design", hours: 8, rate: 150 },
+      { id: "2", description: "Navigation implementation", hours: 6, rate: 150 },
+      { id: "3", description: "Responsive testing", hours: 4, rate: 150 },
+    ]
+  },
+  { 
+    id: "INV-002", 
+    client: "TechStart", 
+    clientEmail: "finance@techstart.io",
+    clientAddress: "456 Tech Blvd, San Francisco, CA 94102",
+    project: "Mobile App", 
+    amount: 3150, 
+    date: "2024-11-20", 
+    dueDate: "2024-12-20",
+    status: "paid",
+    items: [
+      { id: "1", description: "API integration", hours: 10, rate: 175 },
+      { id: "2", description: "UI components", hours: 8, rate: 175 },
+    ]
+  },
+  { 
+    id: "INV-003", 
+    client: "StyleCo", 
+    clientEmail: "accounts@styleco.com",
+    clientAddress: "789 Design St, Los Angeles, CA 90001",
+    project: "Brand Identity", 
+    amount: 1875, 
+    date: "2024-11-15", 
+    dueDate: "2024-12-15",
+    status: "draft",
+    items: [
+      { id: "1", description: "Logo design concepts", hours: 10, rate: 125 },
+      { id: "2", description: "Brand guidelines", hours: 5, rate: 125 },
+    ]
+  },
+];
+
 export default function Invoices() {
-  const [invoices] = useState(mockInvoices);
+  const [invoices, setInvoices] = useState<Invoice[]>(mockInvoices);
+  const [selectedInvoice, setSelectedInvoice] = useState<Invoice | null>(null);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [isEditOpen, setIsEditOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<string>("");
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
@@ -108,7 +170,6 @@ export default function Invoices() {
   };
 
   const generatePDF = () => {
-    // In a real app, this would generate an actual PDF
     toast.success("Invoice PDF generated and downloaded!");
     setIsCreateOpen(false);
     resetForm();
@@ -123,6 +184,33 @@ export default function Invoices() {
     setRecurringInterval("monthly");
     setClientName("");
     setClientEmail("");
+  };
+
+  const openEditDialog = (invoice: Invoice) => {
+    setSelectedInvoice(invoice);
+    setLineItems([...invoice.items]);
+    setClientName(invoice.client);
+    setClientEmail(invoice.clientEmail);
+    setIsEditOpen(true);
+  };
+
+  const saveInvoiceChanges = () => {
+    if (!selectedInvoice) return;
+    
+    const updatedInvoice = {
+      ...selectedInvoice,
+      client: clientName,
+      clientEmail: clientEmail,
+      items: lineItems,
+      amount: calculateTotal(),
+    };
+
+    setInvoices(invoices.map(inv => 
+      inv.id === selectedInvoice.id ? updatedInvoice : inv
+    ));
+    setSelectedInvoice(updatedInvoice);
+    setIsEditOpen(false);
+    toast.success("Invoice updated successfully!");
   };
 
   const getStatusColor = (status: string) => {
@@ -240,7 +328,6 @@ export default function Invoices() {
                 </div>
               ) : (
                 <div className="space-y-3">
-                  {/* Header */}
                   <div className="grid grid-cols-12 gap-2 text-sm font-medium text-muted-foreground px-2">
                     <div className="col-span-5">Description</div>
                     <div className="col-span-2">Hours</div>
@@ -288,7 +375,6 @@ export default function Invoices() {
                     </div>
                   ))}
 
-                  {/* Total */}
                   <div className="flex justify-end p-4 rounded-xl gradient-lime">
                     <div className="text-right">
                       <p className="text-sm text-primary/70 font-medium">Total Amount</p>
@@ -396,52 +482,269 @@ export default function Invoices() {
         </Card>
       </div>
 
-      {/* Invoice List */}
-      <Card className="bg-card rounded-3xl card-shadow border-0">
-        <CardHeader>
-          <CardTitle className="text-xl">Recent Invoices</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-3">
-            {invoices.map((invoice, index) => {
-              const gradients = ["gradient-lime", "gradient-peach", "gradient-lavender", "gradient-amber"];
-              return (
-                <div 
-                  key={invoice.id} 
-                  className={`flex items-center justify-between p-4 rounded-2xl ${gradients[index % gradients.length]} hover:scale-[1.01] transition-all cursor-pointer`}
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-white/40 backdrop-blur-sm flex items-center justify-center">
-                      <FileText className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <p className="font-bold text-primary">{invoice.id}</p>
-                      <div className="flex items-center gap-2 text-sm text-primary/70">
-                        <Building2 className="w-3 h-3" />
-                        <span>{invoice.client}</span>
-                        <span>•</span>
-                        <span>{invoice.project}</span>
+      {/* Main Content - Invoice List + Preview */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Invoice List */}
+        <Card className={`bg-card rounded-3xl card-shadow border-0 ${selectedInvoice ? 'lg:col-span-1' : 'lg:col-span-3'}`}>
+          <CardHeader>
+            <CardTitle className="text-xl">Recent Invoices</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-3">
+              {invoices.map((invoice, index) => {
+                const gradients = ["gradient-lime", "gradient-peach", "gradient-lavender", "gradient-amber"];
+                const isSelected = selectedInvoice?.id === invoice.id;
+                return (
+                  <div 
+                    key={invoice.id} 
+                    onClick={() => setSelectedInvoice(invoice)}
+                    className={`flex items-center justify-between p-4 rounded-2xl ${gradients[index % gradients.length]} hover:scale-[1.01] transition-all cursor-pointer ${isSelected ? 'ring-2 ring-primary ring-offset-2' : ''}`}
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-white/40 backdrop-blur-sm flex items-center justify-center">
+                        <FileText className="w-6 h-6 text-primary" />
+                      </div>
+                      <div>
+                        <p className="font-bold text-primary">{invoice.id}</p>
+                        <div className="flex items-center gap-2 text-sm text-primary/70">
+                          <Building2 className="w-3 h-3" />
+                          <span>{invoice.client}</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <div className="text-right">
-                      <p className="text-lg font-bold text-primary">${invoice.amount.toLocaleString()}</p>
-                      <p className="text-xs text-primary/70">{invoice.date}</p>
+                    <div className="flex items-center gap-4">
+                      <div className="text-right">
+                        <p className="text-lg font-bold text-primary">${invoice.amount.toLocaleString()}</p>
+                        <p className="text-xs text-primary/70">{invoice.date}</p>
+                      </div>
+                      <Badge className={`${getStatusColor(invoice.status)} capitalize`}>
+                        {invoice.status}
+                      </Badge>
                     </div>
-                    <Badge className={`${getStatusColor(invoice.status)} capitalize`}>
-                      {invoice.status}
-                    </Badge>
-                    <Button variant="ghost" size="icon" className="text-primary">
-                      <Download className="w-4 h-4" />
-                    </Button>
+                  </div>
+                );
+              })}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Invoice Preview */}
+        {selectedInvoice && (
+          <Card className="lg:col-span-2 bg-card rounded-3xl card-shadow border-0">
+            <CardHeader className="flex flex-row items-start justify-between">
+              <div>
+                <CardTitle className="text-2xl">{selectedInvoice.id}</CardTitle>
+                <p className="text-muted-foreground mt-1">{selectedInvoice.project}</p>
+              </div>
+              <div className="flex gap-2">
+                <Button variant="outline" size="icon" onClick={() => openEditDialog(selectedInvoice)}>
+                  <Pencil className="w-4 h-4" />
+                </Button>
+                <Button variant="outline" size="icon">
+                  <Download className="w-4 h-4" />
+                </Button>
+                <Button variant="ghost" size="icon" onClick={() => setSelectedInvoice(null)}>
+                  <X className="w-4 h-4" />
+                </Button>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {/* Invoice Header Info */}
+              <div className="grid grid-cols-2 gap-6">
+                <div className="p-4 rounded-2xl gradient-peach">
+                  <p className="text-xs text-primary/70 font-medium mb-1">Bill To</p>
+                  <p className="font-bold text-primary text-lg">{selectedInvoice.client}</p>
+                  <div className="flex items-center gap-2 text-sm text-primary/80 mt-2">
+                    <Mail className="w-3 h-3" />
+                    <span>{selectedInvoice.clientEmail}</span>
+                  </div>
+                  <div className="flex items-start gap-2 text-sm text-primary/80 mt-1">
+                    <MapPin className="w-3 h-3 mt-0.5" />
+                    <span>{selectedInvoice.clientAddress}</span>
                   </div>
                 </div>
-              );
-            })}
+                <div className="p-4 rounded-2xl gradient-lavender">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-xs text-primary/70 font-medium mb-1">Invoice Date</p>
+                      <p className="font-semibold text-primary">{selectedInvoice.date}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-primary/70 font-medium mb-1">Due Date</p>
+                      <p className="font-semibold text-primary">{selectedInvoice.dueDate}</p>
+                    </div>
+                    <div className="col-span-2">
+                      <p className="text-xs text-primary/70 font-medium mb-1">Status</p>
+                      <Badge className={`${getStatusColor(selectedInvoice.status)} capitalize`}>
+                        {selectedInvoice.status}
+                      </Badge>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Line Items Table */}
+              <div className="space-y-3">
+                <h3 className="text-lg font-semibold">Line Items</h3>
+                <div className="rounded-2xl border overflow-hidden">
+                  <div className="grid grid-cols-12 gap-4 p-4 bg-muted/50 text-sm font-medium text-muted-foreground">
+                    <div className="col-span-6">Description</div>
+                    <div className="col-span-2 text-right">Hours</div>
+                    <div className="col-span-2 text-right">Rate</div>
+                    <div className="col-span-2 text-right">Amount</div>
+                  </div>
+                  {selectedInvoice.items.map((item, index) => (
+                    <div key={item.id} className={`grid grid-cols-12 gap-4 p-4 ${index % 2 === 0 ? 'bg-background' : 'bg-muted/30'}`}>
+                      <div className="col-span-6 font-medium">{item.description}</div>
+                      <div className="col-span-2 text-right text-muted-foreground">{item.hours}</div>
+                      <div className="col-span-2 text-right text-muted-foreground">${item.rate}</div>
+                      <div className="col-span-2 text-right font-semibold">${(item.hours * item.rate).toLocaleString()}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Total */}
+              <div className="flex justify-end">
+                <div className="w-64 p-4 rounded-2xl gradient-lime">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-sm text-primary/70">Subtotal</span>
+                    <span className="font-semibold text-primary">${selectedInvoice.amount.toLocaleString()}</span>
+                  </div>
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-sm text-primary/70">Tax (0%)</span>
+                    <span className="font-semibold text-primary">$0</span>
+                  </div>
+                  <Separator className="my-2 bg-primary/20" />
+                  <div className="flex justify-between items-center">
+                    <span className="font-bold text-primary">Total</span>
+                    <span className="text-2xl font-bold text-primary">${selectedInvoice.amount.toLocaleString()}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Actions */}
+              <div className="flex gap-3 pt-4">
+                <Button className="gap-2" onClick={() => toast.success("Invoice sent to client!")}>
+                  <Mail className="w-4 h-4" />
+                  Send to Client
+                </Button>
+                <Button variant="outline" className="gap-2">
+                  <Download className="w-4 h-4" />
+                  Download PDF
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+      </div>
+
+      {/* Edit Invoice Dialog */}
+      <Dialog open={isEditOpen} onOpenChange={setIsEditOpen}>
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-2xl">Edit Invoice {selectedInvoice?.id}</DialogTitle>
+          </DialogHeader>
+          
+          <div className="space-y-4 mt-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label>Client Name</Label>
+                <Input 
+                  value={clientName} 
+                  onChange={e => setClientName(e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label>Client Email</Label>
+                <Input 
+                  type="email"
+                  value={clientEmail} 
+                  onChange={e => setClientEmail(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <Separator className="my-4" />
+
+            {/* Line Items */}
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-semibold">Line Items</h3>
+                <Button variant="outline" size="sm" onClick={addManualItem} className="gap-2">
+                  <Plus className="w-4 h-4" />
+                  Add Item
+                </Button>
+              </div>
+
+              <div className="space-y-3">
+                <div className="grid grid-cols-12 gap-2 text-sm font-medium text-muted-foreground px-2">
+                  <div className="col-span-5">Description</div>
+                  <div className="col-span-2">Hours</div>
+                  <div className="col-span-2">Rate</div>
+                  <div className="col-span-2">Total</div>
+                  <div className="col-span-1"></div>
+                </div>
+                
+                {lineItems.map(item => (
+                  <div key={item.id} className="grid grid-cols-12 gap-2 items-center p-3 rounded-xl bg-muted/50">
+                    <div className="col-span-5">
+                      <Input
+                        value={item.description}
+                        onChange={e => updateLineItem(item.id, "description", e.target.value)}
+                        placeholder="Description"
+                      />
+                    </div>
+                    <div className="col-span-2">
+                      <Input
+                        type="number"
+                        value={item.hours}
+                        onChange={e => updateLineItem(item.id, "hours", parseFloat(e.target.value) || 0)}
+                      />
+                    </div>
+                    <div className="col-span-2">
+                      <Input
+                        type="number"
+                        value={item.rate}
+                        onChange={e => updateLineItem(item.id, "rate", parseFloat(e.target.value) || 0)}
+                      />
+                    </div>
+                    <div className="col-span-2 font-semibold">
+                      ${(item.hours * item.rate).toLocaleString()}
+                    </div>
+                    <div className="col-span-1">
+                      <Button 
+                        variant="ghost" 
+                        size="icon"
+                        onClick={() => removeLineItem(item.id)}
+                        className="text-destructive hover:text-destructive"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+
+                <div className="flex justify-end p-4 rounded-xl gradient-lime">
+                  <div className="text-right">
+                    <p className="text-sm text-primary/70 font-medium">Total Amount</p>
+                    <p className="text-3xl font-bold text-primary">${calculateTotal().toLocaleString()}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </CardContent>
-      </Card>
+
+          <DialogFooter className="mt-6">
+            <Button variant="outline" onClick={() => setIsEditOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={saveInvoiceChanges}>
+              Save Changes
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
