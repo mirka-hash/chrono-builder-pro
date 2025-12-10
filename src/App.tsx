@@ -10,6 +10,7 @@ import TimeTracking from "./pages/TimeTracking";
 import Projects from "./pages/Projects";
 import ProjectDetail from "./pages/ProjectDetail";
 import Clients from "./pages/Clients";
+import Invoices from "./pages/Invoices";
 import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
@@ -33,6 +34,7 @@ const App = () => (
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/projects/:id" element={<ProjectDetail />} />
                 <Route path="/clients" element={<Clients />} />
+                <Route path="/invoices" element={<Invoices />} />
                 <Route path="/reports" element={<Reports />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="*" element={<NotFound />} />

@@ -6,7 +6,8 @@ import {
   Users, 
   BarChart3,
   Settings,
-  Timer
+  Timer,
+  FileText
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -15,6 +16,7 @@ const navigation = [
   { name: "Time Tracking", href: "/time-tracking", icon: Clock },
   { name: "Projects", href: "/projects", icon: FolderKanban },
   { name: "Clients", href: "/clients", icon: Users },
+  { name: "Invoices", href: "/invoices", icon: FileText },
   { name: "Reports", href: "/reports", icon: BarChart3 },
 ];
 
