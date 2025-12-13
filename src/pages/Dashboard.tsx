@@ -2,7 +2,7 @@ import { ExternalLink, Plus, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LineUpCard } from "@/components/dashboard/LineUpCard";
 import { useNavigate } from "react-router-dom";
-import { DailyTimelineWidget } from "@/components/dashboard/DailyTimelineWidget";
+import { EnhancedTimelineWidget } from "@/components/dashboard/EnhancedTimelineWidget";
 import { ProductivityGauge } from "@/components/dashboard/ProductivityGauge";
 import { TimeDistributionChart } from "@/components/dashboard/TimeDistributionChart";
 import { WeeklyTrendChart } from "@/components/dashboard/WeeklyTrendChart";
@@ -128,7 +128,7 @@ export default function Dashboard() {
             neutral={productivityData.neutral}
             unproductive={productivityData.unproductive}
           />
-          <DailyTimelineWidget />
+          <EnhancedTimelineWidget />
         </div>
       </div>
 
