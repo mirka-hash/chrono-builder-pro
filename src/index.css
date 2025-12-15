@@ -140,31 +140,6 @@
 }
 
 @layer utilities {
-  /* Neubrutalist gradients - more vibrant */
-  .gradient-peach {
-    background: linear-gradient(135deg, hsl(var(--chart-peach)) 0%, hsl(25 100% 70%) 100%);
-  }
-  
-  .gradient-lavender {
-    background: linear-gradient(135deg, hsl(var(--chart-lavender)) 0%, hsl(280 90% 75%) 100%);
-  }
-  
-  .gradient-lime {
-    background: linear-gradient(135deg, hsl(var(--chart-lime)) 0%, hsl(90 90% 60%) 100%);
-  }
-  
-  .gradient-amber {
-    background: linear-gradient(135deg, hsl(var(--chart-amber)) 0%, hsl(45 100% 60%) 100%);
-  }
-
-  .gradient-pink {
-    background: linear-gradient(135deg, hsl(var(--chart-pink)) 0%, hsl(340 95% 70%) 100%);
-  }
-
-  .gradient-blue {
-    background: linear-gradient(135deg, hsl(var(--chart-blue)) 0%, hsl(220 100% 60%) 100%);
-  }
-  
   /* Neubrutalist shadow - hard offset, no blur */
   .neo-shadow {
     box-shadow: 4px 4px 0 0 hsl(var(--border));
@@ -177,21 +152,8 @@
   .neo-shadow-lg {
     box-shadow: 6px 6px 0 0 hsl(var(--border));
   }
-
-  /* Colored neo shadows */
-  .neo-shadow-accent {
-    box-shadow: 4px 4px 0 0 hsl(var(--accent));
-  }
-
-  .neo-shadow-success {
-    box-shadow: 4px 4px 0 0 hsl(var(--success));
-  }
-
-  .neo-shadow-warning {
-    box-shadow: 4px 4px 0 0 hsl(var(--warning));
-  }
   
-  /* Legacy soft shadows (for backwards compat) */
+  /* Legacy aliases */
   .card-shadow {
     box-shadow: 4px 4px 0 0 hsl(var(--border));
   }
@@ -201,21 +163,27 @@
   }
 
   /* Neubrutalist hover - pop effect */
+  .neo-hover {
+    transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
+  }
+
+  .neo-hover:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 0 hsl(var(--border));
+  }
+
+  .neo-hover:active {
+    transform: translate(0, 0);
+    box-shadow: 2px 2px 0 0 hsl(var(--border));
+  }
+
+  /* Legacy alias */
   .card-hover {
-    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
   }
 
   .card-hover:hover {
     transform: translate(-2px, -2px);
     box-shadow: 6px 6px 0 0 hsl(var(--border));
-  }
-
-  /* Neo border utilities */
-  .neo-border {
-    border: 2px solid hsl(var(--border));
-  }
-
-  .neo-border-thick {
-    border: 3px solid hsl(var(--border));
   }
 }
