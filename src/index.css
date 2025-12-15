@@ -2,129 +2,130 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* 
+  PLAYFUL NEUBRUTALIST DESIGN SYSTEM
+  - Bold black borders
+  - Hard offset shadows (no blur)
+  - Vibrant saturated colors
+  - Sharp/rounded corners mix
+  All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    --background: 35 30% 95%;
-    --foreground: 240 10% 10%;
+    --background: 50 100% 96%;
+    --foreground: 0 0% 5%;
 
-    --card: 0 0% 99%;
-    --card-foreground: 240 10% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 5%;
 
-    --popover: 0 0% 99%;
-    --popover-foreground: 240 10% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 5%;
 
-    --primary: 240 10% 8%;
-    --primary-foreground: 0 0% 98%;
+    --primary: 0 0% 5%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 20 50% 90%;
-    --secondary-foreground: 240 10% 10%;
+    --secondary: 50 100% 85%;
+    --secondary-foreground: 0 0% 5%;
 
-    --muted: 30 20% 88%;
-    --muted-foreground: 240 5% 50%;
+    --muted: 50 30% 90%;
+    --muted-foreground: 0 0% 35%;
 
-    --accent: 280 60% 90%;
-    --accent-foreground: 280 50% 20%;
+    --accent: 280 85% 65%;
+    --accent-foreground: 0 0% 100%;
 
-    --success: 75 65% 85%;
-    --success-foreground: 75 60% 20%;
+    --success: 140 70% 45%;
+    --success-foreground: 0 0% 100%;
 
-    --warning: 35 85% 85%;
-    --warning-foreground: 35 80% 25%;
+    --warning: 45 100% 55%;
+    --warning-foreground: 0 0% 5%;
 
-    --info: 200 70% 85%;
-    --info-foreground: 200 70% 20%;
+    --info: 200 100% 50%;
+    --info-foreground: 0 0% 100%;
 
-    --destructive: 0 70% 60%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 85% 55%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 30 20% 90%;
-    --input: 30 20% 92%;
-    --ring: 240 8% 12%;
+    --border: 0 0% 5%;
+    --input: 0 0% 5%;
+    --ring: 0 0% 5%;
 
-    --radius: 1.25rem;
+    --radius: 0.75rem;
 
-    --chart-peach: 15 90% 78%;
-    --chart-lavender: 280 60% 80%;
-    --chart-lime: 75 70% 75%;
-    --chart-amber: 40 88% 75%;
-    --chart-blue: 210 75% 75%;
-    --chart-pink: 340 85% 80%;
+    /* Vibrant chart colors */
+    --chart-peach: 15 100% 65%;
+    --chart-lavender: 270 85% 70%;
+    --chart-lime: 85 85% 55%;
+    --chart-amber: 40 100% 55%;
+    --chart-blue: 210 100% 55%;
+    --chart-pink: 330 90% 65%;
 
-    --widget-lime: 75 50% 70%;
-    --widget-pink: 320 65% 80%;
+    --widget-lime: 85 80% 55%;
+    --widget-pink: 330 85% 65%;
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 0 0% 5%;
+    --sidebar-primary: 0 0% 5%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 50 100% 85%;
+    --sidebar-accent-foreground: 0 0% 5%;
+    --sidebar-border: 0 0% 5%;
+    --sidebar-ring: 0 0% 5%;
   }
 
   .dark {
-    --background: 240 10% 8%;
+    --background: 0 0% 8%;
     --foreground: 0 0% 98%;
 
-    --card: 240 8% 12%;
+    --card: 0 0% 12%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 240 8% 12%;
+    --popover: 0 0% 12%;
     --popover-foreground: 0 0% 98%;
 
     --primary: 0 0% 98%;
-    --primary-foreground: 240 8% 12%;
+    --primary-foreground: 0 0% 8%;
 
-    --secondary: 240 6% 18%;
+    --secondary: 45 80% 30%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 240 6% 18%;
-    --muted-foreground: 240 5% 65%;
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 65%;
 
-    --accent: 280 50% 20%;
-    --accent-foreground: 280 65% 92%;
+    --accent: 280 75% 55%;
+    --accent-foreground: 0 0% 100%;
 
-    --success: 75 50% 20%;
-    --success-foreground: 75 70% 88%;
+    --success: 140 65% 40%;
+    --success-foreground: 0 0% 100%;
 
-    --warning: 35 70% 25%;
-    --warning-foreground: 35 90% 88%;
+    --warning: 45 90% 50%;
+    --warning-foreground: 0 0% 5%;
 
-    --info: 200 60% 20%;
-    --info-foreground: 200 75% 88%;
+    --info: 200 90% 50%;
+    --info-foreground: 0 0% 100%;
 
-    --destructive: 0 70% 50%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 80% 50%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 240 6% 18%;
-    --input: 240 6% 18%;
-    --ring: 0 0% 80%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 90%;
 
-    --chart-peach: 20 75% 60%;
-    --chart-lavender: 280 45% 60%;
-    --chart-lime: 75 55% 55%;
-    --chart-amber: 35 75% 55%;
-    --chart-blue: 200 60% 55%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --chart-peach: 15 90% 60%;
+    --chart-lavender: 270 75% 60%;
+    --chart-lime: 85 75% 50%;
+    --chart-amber: 40 90% 50%;
+    --chart-blue: 200 90% 55%;
+    --chart-pink: 330 80% 60%;
+
+    --sidebar-background: 0 0% 8%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 0 0% 98%;
+    --sidebar-primary-foreground: 0 0% 8%;
+    --sidebar-accent: 45 60% 25%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 0 0% 90%;
+    --sidebar-ring: 0 0% 90%;
   }
 }
 
@@ -139,44 +140,82 @@ All colors MUST be HSL.
 }
 
 @layer utilities {
+  /* Neubrutalist gradients - more vibrant */
   .gradient-peach {
-    background: linear-gradient(135deg, hsl(var(--chart-peach)) 0%, hsl(20 95% 85%) 100%);
+    background: linear-gradient(135deg, hsl(var(--chart-peach)) 0%, hsl(25 100% 70%) 100%);
   }
   
   .gradient-lavender {
-    background: linear-gradient(135deg, hsl(var(--chart-lavender)) 0%, hsl(280 65% 88%) 100%);
+    background: linear-gradient(135deg, hsl(var(--chart-lavender)) 0%, hsl(280 90% 75%) 100%);
   }
   
   .gradient-lime {
-    background: linear-gradient(135deg, hsl(var(--chart-lime)) 0%, hsl(80 75% 82%) 100%);
+    background: linear-gradient(135deg, hsl(var(--chart-lime)) 0%, hsl(90 90% 60%) 100%);
   }
   
   .gradient-amber {
-    background: linear-gradient(135deg, hsl(var(--chart-amber)) 0%, hsl(42 92% 82%) 100%);
+    background: linear-gradient(135deg, hsl(var(--chart-amber)) 0%, hsl(45 100% 60%) 100%);
   }
 
   .gradient-pink {
-    background: linear-gradient(135deg, hsl(var(--chart-pink)) 0%, hsl(340 90% 88%) 100%);
+    background: linear-gradient(135deg, hsl(var(--chart-pink)) 0%, hsl(340 95% 70%) 100%);
   }
 
   .gradient-blue {
-    background: linear-gradient(135deg, hsl(var(--chart-blue)) 0%, hsl(210 80% 82%) 100%);
+    background: linear-gradient(135deg, hsl(var(--chart-blue)) 0%, hsl(220 100% 60%) 100%);
   }
   
+  /* Neubrutalist shadow - hard offset, no blur */
+  .neo-shadow {
+    box-shadow: 4px 4px 0 0 hsl(var(--border));
+  }
+
+  .neo-shadow-sm {
+    box-shadow: 2px 2px 0 0 hsl(var(--border));
+  }
+
+  .neo-shadow-lg {
+    box-shadow: 6px 6px 0 0 hsl(var(--border));
+  }
+
+  /* Colored neo shadows */
+  .neo-shadow-accent {
+    box-shadow: 4px 4px 0 0 hsl(var(--accent));
+  }
+
+  .neo-shadow-success {
+    box-shadow: 4px 4px 0 0 hsl(var(--success));
+  }
+
+  .neo-shadow-warning {
+    box-shadow: 4px 4px 0 0 hsl(var(--warning));
+  }
+  
+  /* Legacy soft shadows (for backwards compat) */
   .card-shadow {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 2px 8px rgba(0, 0, 0, 0.04);
+    box-shadow: 4px 4px 0 0 hsl(var(--border));
   }
   
   .card-shadow-lg {
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04), 0 4px 24px rgba(0, 0, 0, 0.06);
+    box-shadow: 6px 6px 0 0 hsl(var(--border));
   }
 
+  /* Neubrutalist hover - pop effect */
   .card-hover {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .card-hover:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06), 0 8px 32px rgba(0, 0, 0, 0.08);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 0 hsl(var(--border));
+  }
+
+  /* Neo border utilities */
+  .neo-border {
+    border: 2px solid hsl(var(--border));
+  }
+
+  .neo-border-thick {
+    border: 3px solid hsl(var(--border));
   }
 }

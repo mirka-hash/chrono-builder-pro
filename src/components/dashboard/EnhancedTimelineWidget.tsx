@@ -125,17 +125,17 @@ export function EnhancedTimelineWidget() {
 
   return (
     <TooltipProvider delayDuration={100}>
-      <div className="bg-card rounded-3xl p-6 shadow-sm hover:shadow-lg transition-all">
+      <div className="bg-card rounded-xl p-6 neo-border neo-shadow card-hover">
         <div className="flex items-center justify-between mb-5">
-          <h3 className="text-base font-bold">Today's Timeline</h3>
-          <div className="text-xs font-semibold text-muted-foreground bg-muted px-3 py-1.5 rounded-full">
+          <h3 className="text-base font-black uppercase tracking-tight">Today's Timeline</h3>
+          <div className="text-xs font-bold text-foreground bg-warning px-3 py-1.5 rounded-lg neo-border neo-shadow-sm">
             {formatTime(currentHour, currentMinute)}
           </div>
         </div>
 
         <div className="relative flex" style={{ height: `${hours.length * 48}px` }}>
           {/* App Sessions Column (left - tiny bars) */}
-          <div className="relative w-8 mr-2 flex-shrink-0">
+          <div className="relative w-8 mr-3 flex-shrink-0">
             {appSessions.map((session) => {
               const top = getBlockPosition(session.startHour, session.startMinute);
               const height = getBlockPosition(session.endHour, session.endMinute) - top;
@@ -145,9 +145,9 @@ export function EnhancedTimelineWidget() {
                   <TooltipTrigger asChild>
                     <div
                       className={cn(
-                        "absolute left-0 right-0 rounded-sm cursor-pointer transition-all",
+                        "absolute left-0 right-0 rounded-sm cursor-pointer transition-all border border-foreground",
                         session.color,
-                        hoveredSession === session.id ? "opacity-100 scale-x-110 z-20" : "opacity-70"
+                        hoveredSession === session.id ? "opacity-100 scale-x-125 z-20" : "opacity-90"
                       )}
                       style={{
                         top: `${top}%`,
@@ -157,18 +157,18 @@ export function EnhancedTimelineWidget() {
                       onMouseLeave={() => setHoveredSession(null)}
                     />
                   </TooltipTrigger>
-                  <TooltipContent side="right" className="bg-card border border-border shadow-xl rounded-xl p-3 max-w-xs">
+                  <TooltipContent side="right" className="bg-card neo-border neo-shadow rounded-lg p-3 max-w-xs">
                     <div className="space-y-1.5">
                       <div className="flex items-center gap-2">
-                        <span className={cn("p-1 rounded", appColors[session.app])}>
+                        <span className={cn("p-1.5 rounded-md border border-foreground", appColors[session.app])}>
                           {appIcons[session.app]}
                         </span>
-                        <span className="font-semibold text-sm">{session.app}</span>
-                        <span className="text-xs text-muted-foreground">
+                        <span className="font-bold text-sm">{session.app}</span>
+                        <span className="text-xs text-muted-foreground font-medium">
                           ({getDuration(session.startHour, session.startMinute, session.endHour, session.endMinute)})
                         </span>
                       </div>
-                      <p className="text-xs text-muted-foreground">{session.title}</p>
+                      <p className="text-xs text-muted-foreground font-medium">{session.title}</p>
                       <p className="text-[10px] text-muted-foreground">
                         {formatTime(session.startHour, session.startMinute)} – {formatTime(session.endHour, session.endMinute)}
                       </p>
@@ -185,7 +185,7 @@ export function EnhancedTimelineWidget() {
             {hours.map((hour, idx) => (
               <div 
                 key={hour} 
-                className="absolute left-0 right-0 border-t border-border/30"
+                className="absolute left-0 right-0 border-t border-dashed border-foreground/20"
                 style={{ top: `${(idx / hours.length) * 100}%` }}
               />
             ))}
@@ -200,12 +200,9 @@ export function EnhancedTimelineWidget() {
                   <TooltipTrigger asChild>
                     <div
                       className={cn(
-                        "absolute left-0 right-8 rounded-xl shadow-sm cursor-pointer transition-all overflow-hidden border-l-4",
+                        "absolute left-0 right-8 rounded-lg cursor-pointer transition-all overflow-hidden border-2 border-foreground",
                         block.color,
-                        block.productivityRating === "productive" && "border-l-success",
-                        block.productivityRating === "neutral" && "border-l-warning",
-                        block.productivityRating === "unproductive" && "border-l-destructive",
-                        hoveredBlock === block.id ? "scale-[1.02] shadow-md z-20" : "z-10"
+                        hoveredBlock === block.id ? "translate-x-[-2px] translate-y-[-2px] shadow-[4px_4px_0_0_hsl(var(--foreground))] z-20" : "z-10"
                       )}
                       style={{
                         top: `${top}%`,
@@ -214,44 +211,51 @@ export function EnhancedTimelineWidget() {
                       onMouseEnter={() => setHoveredBlock(block.id)}
                       onMouseLeave={() => setHoveredBlock(null)}
                     >
-                      <div className="p-2 h-full flex flex-col">
-                        <p className="text-xs font-bold text-primary leading-tight line-clamp-1">
+                      {/* Productivity indicator stripe */}
+                      <div className={cn(
+                        "absolute left-0 top-0 bottom-0 w-1.5",
+                        block.productivityRating === "productive" && "bg-success",
+                        block.productivityRating === "neutral" && "bg-warning",
+                        block.productivityRating === "unproductive" && "bg-destructive"
+                      )} />
+                      <div className="p-2.5 pl-4 h-full flex flex-col">
+                        <p className="text-xs font-black text-foreground leading-tight line-clamp-1 uppercase">
                           {block.project}
                         </p>
                         {height > 6 && (
-                          <p className="text-[10px] text-primary/60 mt-0.5">
+                          <p className="text-[10px] text-foreground/70 font-semibold mt-0.5">
                             {block.activity} · {block.sessions} {block.sessions === 1 ? 'session' : 'sessions'}
                           </p>
                         )}
                         {height > 10 && (
-                          <p className="text-[10px] font-medium text-primary/70 mt-auto">
+                          <p className="text-[10px] font-bold text-foreground/80 mt-auto">
                             {getDuration(block.startHour, block.startMinute, block.endHour, block.endMinute)}
                           </p>
                         )}
                       </div>
                     </div>
                   </TooltipTrigger>
-                  <TooltipContent side="left" className="bg-card border border-border shadow-xl rounded-2xl p-4 max-w-xs">
+                  <TooltipContent side="left" className="bg-card neo-border neo-shadow rounded-xl p-4 max-w-xs">
                     <div className="space-y-2">
                       <div className="flex items-center justify-between gap-4">
-                        <span className="font-bold">{block.project}</span>
+                        <span className="font-black uppercase">{block.project}</span>
                         <span className={cn(
-                          "text-xs font-medium px-2 py-0.5 rounded-full",
-                          block.productivityRating === "productive" && "bg-success/20 text-success",
-                          block.productivityRating === "neutral" && "bg-warning/20 text-warning",
-                          block.productivityRating === "unproductive" && "bg-destructive/20 text-destructive"
+                          "text-xs font-bold px-2 py-0.5 rounded-md border border-foreground",
+                          block.productivityRating === "productive" && "bg-success text-success-foreground",
+                          block.productivityRating === "neutral" && "bg-warning text-warning-foreground",
+                          block.productivityRating === "unproductive" && "bg-destructive text-destructive-foreground"
                         )}>
                           {block.productivityRating}
                         </span>
                       </div>
                       <div className="space-y-1 text-sm">
                         <p className="text-muted-foreground">
-                          <span className="font-medium text-foreground">{block.activity}</span> · {block.sessions} sessions
+                          <span className="font-bold text-foreground">{block.activity}</span> · {block.sessions} sessions
                         </p>
                         <p className="text-muted-foreground text-xs">
                           {formatTime(block.startHour, block.startMinute)} – {formatTime(block.endHour, block.endMinute)}
                         </p>
-                        <p className="font-semibold">
+                        <p className="font-black text-lg">
                           {getDuration(block.startHour, block.startMinute, block.endHour, block.endMinute)}
                         </p>
                       </div>
@@ -267,8 +271,8 @@ export function EnhancedTimelineWidget() {
               style={{ top: `${getCurrentTimePosition()}%` }}
             >
               <div className="flex items-center">
-                <div className="w-2 h-2 rounded-full bg-destructive shadow-lg ring-2 ring-destructive/30" />
-                <div className="flex-1 h-[2px] bg-destructive" />
+                <div className="w-3 h-3 rounded-full bg-destructive border-2 border-foreground" />
+                <div className="flex-1 h-[3px] bg-destructive" />
               </div>
             </div>
           </div>
@@ -278,7 +282,7 @@ export function EnhancedTimelineWidget() {
             {hours.map((hour, idx) => (
               <span 
                 key={hour}
-                className="absolute right-0 text-[10px] font-medium text-muted-foreground -translate-y-1/2"
+                className="absolute right-0 text-[11px] font-bold text-muted-foreground -translate-y-1/2"
                 style={{ top: `${(idx / hours.length) * 100}%` }}
               >
                 {hour > 12 ? hour - 12 : hour}
@@ -288,31 +292,31 @@ export function EnhancedTimelineWidget() {
         </div>
 
         {/* Summary */}
-        <div className="mt-6 pt-5 border-t border-border/60">
+        <div className="mt-6 pt-5 border-t-2 border-dashed border-foreground/30">
           <div className="flex items-center justify-between mb-3">
-            <div>
-              <p className="text-xs text-muted-foreground font-medium mb-1">Total logged</p>
-              <p className="text-xl font-bold tracking-tight">7h 45m</p>
+            <div className="bg-chart-lime px-3 py-2 rounded-lg neo-border neo-shadow-sm">
+              <p className="text-[10px] text-foreground font-bold uppercase mb-0.5">Total logged</p>
+              <p className="text-xl font-black tracking-tight">7h 45m</p>
             </div>
-            <div className="text-right">
-              <p className="text-xs text-muted-foreground font-medium mb-1">Sessions</p>
-              <p className="text-xl font-bold tracking-tight text-muted-foreground">{appSessions.length}</p>
+            <div className="text-right bg-chart-lavender px-3 py-2 rounded-lg neo-border neo-shadow-sm">
+              <p className="text-[10px] text-foreground font-bold uppercase mb-0.5">Sessions</p>
+              <p className="text-xl font-black tracking-tight">{appSessions.length}</p>
             </div>
           </div>
           
           {/* Productivity legend */}
-          <div className="flex items-center gap-4 text-xs">
-            <div className="flex items-center gap-1.5">
-              <div className="w-2 h-2 rounded-full bg-success" />
-              <span className="text-muted-foreground">Productive</span>
+          <div className="flex items-center gap-3 text-xs">
+            <div className="flex items-center gap-1.5 bg-success/20 px-2 py-1 rounded-md border border-foreground">
+              <div className="w-2.5 h-2.5 rounded-sm bg-success border border-foreground" />
+              <span className="font-bold text-foreground">Productive</span>
             </div>
-            <div className="flex items-center gap-1.5">
-              <div className="w-2 h-2 rounded-full bg-warning" />
-              <span className="text-muted-foreground">Neutral</span>
+            <div className="flex items-center gap-1.5 bg-warning/20 px-2 py-1 rounded-md border border-foreground">
+              <div className="w-2.5 h-2.5 rounded-sm bg-warning border border-foreground" />
+              <span className="font-bold text-foreground">Neutral</span>
             </div>
-            <div className="flex items-center gap-1.5">
-              <div className="w-2 h-2 rounded-full bg-destructive" />
-              <span className="text-muted-foreground">Unproductive</span>
+            <div className="flex items-center gap-1.5 bg-destructive/20 px-2 py-1 rounded-md border border-foreground">
+              <div className="w-2.5 h-2.5 rounded-sm bg-destructive border border-foreground" />
+              <span className="font-bold text-foreground">Unproductive</span>
             </div>
           </div>
         </div>
