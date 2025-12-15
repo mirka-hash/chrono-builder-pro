@@ -6,6 +6,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Globe, Code, Palette, Users, FolderOpen, Mail, Calendar } from "lucide-react";
 
 interface AppSession {
@@ -125,12 +127,12 @@ export function EnhancedTimelineWidget() {
 
   return (
     <TooltipProvider delayDuration={100}>
-      <div className="bg-card rounded-xl p-6 neo-border neo-shadow card-hover">
-        <div className="flex items-center justify-between mb-5">
-          <h3 className="text-base font-black uppercase tracking-tight">Today's Timeline</h3>
-          <div className="text-xs font-bold text-foreground bg-warning px-3 py-1.5 rounded-lg neo-border neo-shadow-sm">
+      <Card hover className="p-5">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-base font-bold">Today's Timeline</h3>
+          <Badge variant="warning" className="text-xs">
             {formatTime(currentHour, currentMinute)}
-          </div>
+          </Badge>
         </div>
 
         <div className="relative flex" style={{ height: `${hours.length * 48}px` }}>
@@ -157,10 +159,10 @@ export function EnhancedTimelineWidget() {
                       onMouseLeave={() => setHoveredSession(null)}
                     />
                   </TooltipTrigger>
-                  <TooltipContent side="right" className="bg-card neo-border neo-shadow rounded-lg p-3 max-w-xs">
+                  <TooltipContent side="right" className="p-3 max-w-xs">
                     <div className="space-y-1.5">
                       <div className="flex items-center gap-2">
-                        <span className={cn("p-1.5 rounded-md border border-foreground", appColors[session.app])}>
+                        <span className={cn("p-1.5 rounded-md border-2 border-border", appColors[session.app])}>
                           {appIcons[session.app]}
                         </span>
                         <span className="font-bold text-sm">{session.app}</span>
@@ -235,18 +237,16 @@ export function EnhancedTimelineWidget() {
                       </div>
                     </div>
                   </TooltipTrigger>
-                  <TooltipContent side="left" className="bg-card neo-border neo-shadow rounded-xl p-4 max-w-xs">
+                  <TooltipContent side="left" className="p-4 max-w-xs">
                     <div className="space-y-2">
                       <div className="flex items-center justify-between gap-4">
-                        <span className="font-black uppercase">{block.project}</span>
-                        <span className={cn(
-                          "text-xs font-bold px-2 py-0.5 rounded-md border border-foreground",
-                          block.productivityRating === "productive" && "bg-success text-success-foreground",
-                          block.productivityRating === "neutral" && "bg-warning text-warning-foreground",
-                          block.productivityRating === "unproductive" && "bg-destructive text-destructive-foreground"
-                        )}>
+                        <span className="font-bold">{block.project}</span>
+                        <Badge variant={
+                          block.productivityRating === "productive" ? "success" :
+                          block.productivityRating === "neutral" ? "warning" : "destructive"
+                        }>
                           {block.productivityRating}
-                        </span>
+                        </Badge>
                       </div>
                       <div className="space-y-1 text-sm">
                         <p className="text-muted-foreground">
@@ -292,35 +292,35 @@ export function EnhancedTimelineWidget() {
         </div>
 
         {/* Summary */}
-        <div className="mt-6 pt-5 border-t-2 border-dashed border-foreground/30">
+        <div className="mt-5 pt-4 border-t-2 border-dashed border-border/50">
           <div className="flex items-center justify-between mb-3">
-            <div className="bg-chart-lime px-3 py-2 rounded-lg neo-border neo-shadow-sm">
-              <p className="text-[10px] text-foreground font-bold uppercase mb-0.5">Total logged</p>
-              <p className="text-xl font-black tracking-tight">7h 45m</p>
+            <div className="bg-chart-lime px-3 py-2 rounded-lg border-2 border-border shadow-[2px_2px_0_0_hsl(var(--border))]">
+              <p className="text-[10px] text-foreground font-semibold mb-0.5">Total logged</p>
+              <p className="text-xl font-bold tracking-tight">7h 45m</p>
             </div>
-            <div className="text-right bg-chart-lavender px-3 py-2 rounded-lg neo-border neo-shadow-sm">
-              <p className="text-[10px] text-foreground font-bold uppercase mb-0.5">Sessions</p>
-              <p className="text-xl font-black tracking-tight">{appSessions.length}</p>
+            <div className="text-right bg-chart-lavender px-3 py-2 rounded-lg border-2 border-border shadow-[2px_2px_0_0_hsl(var(--border))]">
+              <p className="text-[10px] text-foreground font-semibold mb-0.5">Sessions</p>
+              <p className="text-xl font-bold tracking-tight">{appSessions.length}</p>
             </div>
           </div>
           
           {/* Productivity legend */}
-          <div className="flex items-center gap-3 text-xs">
-            <div className="flex items-center gap-1.5 bg-success/20 px-2 py-1 rounded-md border border-foreground">
-              <div className="w-2.5 h-2.5 rounded-sm bg-success border border-foreground" />
-              <span className="font-bold text-foreground">Productive</span>
-            </div>
-            <div className="flex items-center gap-1.5 bg-warning/20 px-2 py-1 rounded-md border border-foreground">
-              <div className="w-2.5 h-2.5 rounded-sm bg-warning border border-foreground" />
-              <span className="font-bold text-foreground">Neutral</span>
-            </div>
-            <div className="flex items-center gap-1.5 bg-destructive/20 px-2 py-1 rounded-md border border-foreground">
-              <div className="w-2.5 h-2.5 rounded-sm bg-destructive border border-foreground" />
-              <span className="font-bold text-foreground">Unproductive</span>
-            </div>
+          <div className="flex items-center gap-2 text-xs">
+            <Badge variant="success" className="gap-1.5">
+              <div className="w-2 h-2 rounded-sm bg-success-foreground" />
+              Productive
+            </Badge>
+            <Badge variant="warning" className="gap-1.5">
+              <div className="w-2 h-2 rounded-sm bg-warning-foreground" />
+              Neutral
+            </Badge>
+            <Badge variant="destructive" className="gap-1.5">
+              <div className="w-2 h-2 rounded-sm bg-destructive-foreground" />
+              Unproductive
+            </Badge>
           </div>
         </div>
-      </div>
+      </Card>
     </TooltipProvider>
   );
 }
