@@ -13,64 +13,64 @@
 
 @layer base {
   :root {
-    --background: 50 100% 96%;
-    --foreground: 0 0% 5%;
+    --background: 40 40% 96%;
+    --foreground: 25 20% 15%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 5%;
+    --card: 40 30% 99%;
+    --card-foreground: 25 20% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 5%;
+    --popover: 40 30% 99%;
+    --popover-foreground: 25 20% 15%;
 
-    --primary: 0 0% 5%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 25 20% 18%;
+    --primary-foreground: 40 30% 98%;
 
-    --secondary: 50 100% 85%;
-    --secondary-foreground: 0 0% 5%;
+    --secondary: 35 45% 88%;
+    --secondary-foreground: 25 20% 15%;
 
-    --muted: 50 30% 90%;
-    --muted-foreground: 0 0% 35%;
+    --muted: 35 25% 90%;
+    --muted-foreground: 25 15% 45%;
 
-    --accent: 280 85% 65%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 320 35% 75%;
+    --accent-foreground: 320 40% 20%;
 
-    --success: 140 70% 45%;
-    --success-foreground: 0 0% 100%;
+    --success: 155 40% 55%;
+    --success-foreground: 155 35% 15%;
 
-    --warning: 45 100% 55%;
-    --warning-foreground: 0 0% 5%;
+    --warning: 40 55% 65%;
+    --warning-foreground: 35 40% 15%;
 
-    --info: 200 100% 50%;
-    --info-foreground: 0 0% 100%;
+    --info: 200 45% 65%;
+    --info-foreground: 200 40% 15%;
 
-    --destructive: 0 85% 55%;
+    --destructive: 5 55% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 5%;
-    --input: 0 0% 5%;
-    --ring: 0 0% 5%;
+    --border: 25 20% 20%;
+    --input: 25 20% 20%;
+    --ring: 25 20% 20%;
 
     --radius: 0.75rem;
 
-    /* Vibrant chart colors */
-    --chart-peach: 15 100% 65%;
-    --chart-lavender: 270 85% 70%;
-    --chart-lime: 85 85% 55%;
-    --chart-amber: 40 100% 55%;
-    --chart-blue: 210 100% 55%;
-    --chart-pink: 330 90% 65%;
+    /* Warm pastel chart colors */
+    --chart-peach: 20 55% 78%;
+    --chart-lavender: 280 35% 80%;
+    --chart-lime: 95 40% 72%;
+    --chart-amber: 38 50% 72%;
+    --chart-blue: 200 40% 75%;
+    --chart-pink: 345 45% 78%;
 
-    --widget-lime: 85 80% 55%;
-    --widget-pink: 330 85% 65%;
+    --widget-lime: 95 40% 70%;
+    --widget-pink: 345 40% 75%;
 
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 0 0% 5%;
-    --sidebar-primary: 0 0% 5%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 50 100% 85%;
-    --sidebar-accent-foreground: 0 0% 5%;
-    --sidebar-border: 0 0% 5%;
-    --sidebar-ring: 0 0% 5%;
+    --sidebar-background: 40 30% 99%;
+    --sidebar-foreground: 25 20% 15%;
+    --sidebar-primary: 25 20% 18%;
+    --sidebar-primary-foreground: 40 30% 98%;
+    --sidebar-accent: 35 45% 88%;
+    --sidebar-accent-foreground: 25 20% 15%;
+    --sidebar-border: 25 20% 20%;
+    --sidebar-ring: 25 20% 20%;
   }
 
   .dark {
