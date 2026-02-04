@@ -58,6 +58,12 @@ export default {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+          yellow: "hsl(var(--card-yellow))",
+          pink: "hsl(var(--card-pink))",
+          green: "hsl(var(--card-green))",
+          blue: "hsl(var(--card-blue))",
+          cream: "hsl(var(--card-cream))",
+          lavender: "hsl(var(--card-lavender))",
         },
         chart: {
           peach: "hsl(var(--chart-peach))",

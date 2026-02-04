@@ -7,7 +7,8 @@ import {
   BarChart3,
   Settings,
   Timer,
-  FileText
+  FileText,
+  LogOut
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -22,17 +23,24 @@ const navigation = [
 
 export function Sidebar() {
   return (
-    <aside className="w-64 bg-primary text-primary-foreground flex flex-col h-screen fixed left-0 top-0">
-      <div className="p-6 border-b border-primary-foreground/10">
+    <aside className="w-64 bg-sidebar text-sidebar-foreground flex flex-col h-screen fixed left-0 top-0 rounded-r-3xl">
+      {/* Logo */}
+      <div className="p-6 pt-8">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-chart-lime rounded-2xl flex items-center justify-center shadow-md">
-            <Timer className="w-6 h-6 text-primary" />
+          <div className="w-10 h-10 bg-card-pink rounded-2xl flex items-center justify-center">
+            <Timer className="w-5 h-5 text-foreground" />
           </div>
           <span className="text-xl font-bold tracking-tight">TimeFlow</span>
         </div>
       </div>
 
-      <nav className="flex-1 px-3 py-6 space-y-1">
+      {/* Section Label */}
+      <div className="px-6 pt-4 pb-2">
+        <span className="text-xs font-medium text-sidebar-foreground/50 uppercase tracking-wider">General</span>
+      </div>
+
+      {/* Main Navigation */}
+      <nav className="flex-1 px-3 space-y-1">
         {navigation.map((item) => (
           <NavLink
             key={item.name}
@@ -40,16 +48,16 @@ export function Sidebar() {
             end={item.href === "/"}
             className={({ isActive }) =>
               cn(
-                "flex items-center gap-3 px-4 py-3.5 rounded-2xl text-sm font-medium transition-all duration-200",
+                "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200",
                 isActive
-                  ? "bg-primary-foreground/10 text-primary-foreground shadow-sm"
-                  : "text-primary-foreground/60 hover:bg-primary-foreground/5 hover:text-primary-foreground/90"
+                  ? "bg-sidebar-foreground/10 text-sidebar-foreground"
+                  : "text-sidebar-foreground/60 hover:bg-sidebar-foreground/5 hover:text-sidebar-foreground"
               )
             }
           >
             {({ isActive }) => (
               <>
-                <item.icon className={cn("w-5 h-5", isActive ? "stroke-[2.5]" : "stroke-2")} />
+                <item.icon className={cn("w-5 h-5", isActive && "stroke-[2]")} />
                 <span>{item.name}</span>
               </>
             )}
@@ -57,21 +65,27 @@ export function Sidebar() {
         ))}
       </nav>
 
-      <div className="p-3 border-t border-primary-foreground/10">
+      {/* Bottom Section */}
+      <div className="p-3 space-y-1">
         <NavLink
           to="/settings"
           className={({ isActive }) =>
             cn(
-              "flex items-center gap-3 px-4 py-3.5 rounded-2xl text-sm font-medium transition-all duration-200",
+              "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200",
               isActive
-                ? "bg-primary-foreground/10 text-primary-foreground shadow-sm"
-                : "text-primary-foreground/60 hover:bg-primary-foreground/5 hover:text-primary-foreground/90"
+                ? "bg-sidebar-foreground/10 text-sidebar-foreground"
+                : "text-sidebar-foreground/60 hover:bg-sidebar-foreground/5 hover:text-sidebar-foreground"
             )
           }
         >
           <Settings className="w-5 h-5" />
           <span>Settings</span>
         </NavLink>
+        
+        <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-sidebar-foreground/60 hover:bg-sidebar-foreground/5 hover:text-sidebar-foreground transition-all duration-200">
+          <LogOut className="w-5 h-5" />
+          <span>Log out</span>
+        </button>
       </div>
     </aside>
   );
