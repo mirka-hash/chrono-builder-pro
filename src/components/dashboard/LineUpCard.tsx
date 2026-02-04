@@ -13,50 +13,50 @@ interface LineUpCardProps {
 }
 
 export function LineUpCard({ project, category, progress, time, team, variant, onClick }: LineUpCardProps) {
-  const gradientClasses = {
-    peach: "gradient-peach",
-    lavender: "gradient-lavender",
-    lime: "gradient-lime",
-    amber: "gradient-amber",
+  const colorClasses = {
+    peach: "bg-card-pink",
+    lavender: "bg-card-lavender",
+    lime: "bg-card-green",
+    amber: "bg-card-yellow",
   };
 
   const avatarColors = [
-    "bg-chart-peach",
-    "bg-chart-lavender", 
-    "bg-chart-lime",
-    "bg-chart-amber",
+    "bg-card-pink",
+    "bg-card-lavender", 
+    "bg-card-green",
+    "bg-card-yellow",
   ];
 
   return (
     <div 
       onClick={onClick}
       className={cn(
-        "rounded-3xl p-6 shadow-sm transition-all hover:shadow-lg hover:-translate-y-0.5 cursor-pointer",
-        gradientClasses[variant]
+        "rounded-2xl p-6 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md cursor-pointer",
+        colorClasses[variant]
       )}
     >
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1">
-          <p className="text-xs text-primary/70 font-semibold mb-1.5 tracking-wide uppercase">{category}</p>
-          <p className="text-base font-bold text-primary leading-tight">{project}</p>
+          <p className="text-xs text-foreground/60 font-semibold mb-1.5 tracking-wide uppercase">{category}</p>
+          <p className="text-base font-bold text-foreground leading-tight">{project}</p>
         </div>
-        <p className="text-4xl font-bold text-primary ml-4 tracking-tight">{progress}%</p>
+        <p className="text-4xl font-bold text-foreground ml-4 tracking-tight">{progress}%</p>
       </div>
 
       <div className="flex items-center justify-between">
         <div className="flex -space-x-2">
           {team.map((initial, i) => (
             <Avatar key={i} className={cn(
-              "w-8 h-8 border-[3px] border-white shadow-sm transition-transform hover:scale-110 hover:z-10",
+              "w-8 h-8 border-2 border-white shadow-sm transition-transform hover:scale-110 hover:z-10",
               avatarColors[i % avatarColors.length]
             )}>
-              <AvatarFallback className="text-xs font-bold text-primary">
+              <AvatarFallback className="text-xs font-bold text-foreground bg-white/60">
                 {initial}
               </AvatarFallback>
             </Avatar>
           ))}
         </div>
-        <div className="flex items-center gap-1.5 text-xs text-primary/70 bg-white/40 px-2.5 py-1 rounded-full">
+        <div className="flex items-center gap-1.5 text-xs text-foreground/70 bg-white/50 px-2.5 py-1.5 rounded-full">
           <Clock className="w-3.5 h-3.5" />
           <span className="font-semibold">{time}</span>
         </div>

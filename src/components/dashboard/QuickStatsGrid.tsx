@@ -21,28 +21,28 @@ export function QuickStatsGrid({
       label: "Today",
       value: `${todayHours}h`,
       subtext: "tracked",
-      gradient: "gradient-peach",
+      bgClass: "bg-card-pink",
     },
     {
       icon: Target,
       label: "Weekly Goal",
       value: `${weeklyProgress}%`,
       subtext: `${weeklyGoal}h target`,
-      gradient: "gradient-lime",
+      bgClass: "bg-card-green",
     },
     {
       icon: Flame,
       label: "Streak",
       value: `${streak}`,
       subtext: "days",
-      gradient: "gradient-amber",
+      bgClass: "bg-card-yellow",
     },
     {
       icon: Calendar,
       label: "Daily Avg",
       value: `${avgDailyHours}h`,
       subtext: "this week",
-      gradient: "gradient-lavender",
+      bgClass: "bg-card-blue",
     },
   ];
 
@@ -51,17 +51,17 @@ export function QuickStatsGrid({
       {stats.map((stat, index) => (
         <div 
           key={index} 
-          className={`${stat.gradient} rounded-3xl p-5 card-shadow card-hover`}
+          className={`${stat.bgClass} rounded-2xl p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md`}
         >
           <div className="flex items-start justify-between mb-3">
-            <div className="p-2 bg-background/30 rounded-xl backdrop-blur-sm">
-              <stat.icon className="w-5 h-5" />
+            <div className="p-2.5 bg-white/50 rounded-xl">
+              <stat.icon className="w-5 h-5 text-foreground" />
             </div>
           </div>
           <div>
-            <p className="text-2xl font-bold">{stat.value}</p>
-            <p className="text-sm font-medium opacity-80">{stat.label}</p>
-            <p className="text-xs opacity-60">{stat.subtext}</p>
+            <p className="text-2xl font-bold text-foreground">{stat.value}</p>
+            <p className="text-sm font-medium text-foreground/80">{stat.label}</p>
+            <p className="text-xs text-foreground/60">{stat.subtext}</p>
           </div>
         </div>
       ))}
