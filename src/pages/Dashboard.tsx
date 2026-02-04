@@ -9,6 +9,8 @@ import { WeeklyTrendChart } from "@/components/dashboard/WeeklyTrendChart";
 import { TopProjectsWidget } from "@/components/dashboard/TopProjectsWidget";
 import { QuickStatsGrid } from "@/components/dashboard/QuickStatsGrid";
 import { ProductivityBreakdown } from "@/components/dashboard/ProductivityBreakdown";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 // Mock data - in production this would come from your database
 const lineUpProjects = [
@@ -64,13 +66,13 @@ export default function Dashboard() {
           <p className="text-sm text-muted-foreground">Friday, July 26, 2024</p>
         </div>
         <div className="flex items-center gap-3">
-          <Button variant="outline" size="sm" className="gap-2 rounded-2xl" onClick={() => navigate("/projects")}>
+          <Button variant="outline" size="sm" className="gap-2" onClick={() => navigate("/projects")}>
             <ExternalLink className="w-4 h-4" />
-            Projects <span className="text-xs bg-muted px-1.5 py-0.5 rounded">44</span>
+            Projects <Badge variant="secondary" className="ml-1">44</Badge>
           </Button>
-          <Button variant="outline" size="sm" className="gap-2 rounded-2xl">
+          <Button variant="outline" size="sm" className="gap-2">
             <ExternalLink className="w-4 h-4" />
-            Tasks <span className="text-xs bg-muted px-1.5 py-0.5 rounded">116</span>
+            Tasks <Badge variant="secondary" className="ml-1">116</Badge>
           </Button>
         </div>
       </div>
@@ -97,7 +99,7 @@ export default function Dashboard() {
               <h2 className="text-2xl font-bold tracking-tight">
                 LineUp <span className="text-xl text-muted-foreground font-semibold">(2)</span>
               </h2>
-              <Button size="sm" className="gap-2 rounded-2xl shadow-sm h-8">
+              <Button size="sm" className="gap-2 h-8">
                 <Plus className="w-4 h-4" />
                 Add Task
               </Button>
@@ -133,77 +135,82 @@ export default function Dashboard() {
       </div>
 
       {/* My Work Section */}
-      <div className="bg-card rounded-3xl p-7 shadow-sm hover:shadow-lg transition-all">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold tracking-tight">
-            My Work <span className="text-lg text-muted-foreground font-semibold">(3)</span>
-          </h2>
-          <div className="flex items-center gap-1 bg-muted/50 rounded-2xl p-1">
-            <button className="bg-primary text-primary-foreground px-4 py-2.5 rounded-xl font-semibold text-sm shadow-sm transition-all hover:scale-105">
-              To do <span className="ml-1.5 bg-foreground/20 px-1.5 py-0.5 rounded">6</span>
-            </button>
-            <button className="text-muted-foreground hover:text-foreground px-3 py-2.5 rounded-xl font-medium text-sm transition-colors hover:bg-background">
-              Comments <span className="ml-1">2</span>
-            </button>
-            <button className="text-muted-foreground hover:text-foreground px-3 py-2.5 rounded-xl font-medium text-sm transition-colors hover:bg-background">
-              Done <span className="ml-1">15</span>
-            </button>
-            <button className="text-muted-foreground hover:text-foreground px-3 py-2.5 rounded-xl font-medium text-sm transition-colors hover:bg-background">
-              Delegate <span className="ml-1">4</span>
-            </button>
-          </div>
-        </div>
-        
-        <div className="space-y-2">
-          {[
-            { task: "Dribbble: Banking app shot", path: "Publications / Shots / Dribbble", id: "3/19", date: "July 22" },
-            { task: "Behance: Mobile delivery app", path: "Publications / Shots / Behance", id: "1/8", date: "July 24" },
-            { task: "Event: User research methods", path: "Internal / Events / Design", id: "2/14", date: "July 26" },
-          ].map((item, i) => (
-            <div key={i} className="flex items-center gap-4 p-4 rounded-2xl hover:bg-muted/40 transition-all border border-transparent hover:border-border/40 cursor-pointer group">
-              <div className="flex-1">
-                <p className="text-xs text-muted-foreground font-medium mb-1.5">{item.path}</p>
-                <p className="text-sm font-bold group-hover:text-primary transition-colors">{item.task}</p>
-              </div>
-              <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                <span className="font-semibold bg-muted px-2 py-1 rounded-lg">{item.id}</span>
-                <div className="flex -space-x-2">
-                  {["A", "B", "C"].slice(0, i + 2).map((letter, j) => (
-                    <div key={j} className="w-7 h-7 rounded-full bg-chart-peach border-[3px] border-card flex items-center justify-center text-xs font-bold text-foreground shadow-sm hover:scale-110 hover:z-10 transition-transform">
-                      {letter}
-                    </div>
-                  ))}
-                  {i === 2 && <div className="w-7 h-7 rounded-full bg-muted border-[3px] border-card flex items-center justify-center text-xs font-bold shadow-sm hover:scale-110 hover:z-10 transition-transform">+3</div>}
-                </div>
-                <span className="font-medium">{item.date}</span>
-                <button className="text-muted-foreground hover:text-foreground font-bold text-lg transition-colors">⋯</button>
-              </div>
+      <Card variant="elevated">
+        <CardHeader>
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-xl">
+              My Work <span className="text-lg text-muted-foreground font-semibold">(3)</span>
+            </CardTitle>
+            <div className="flex items-center gap-1 bg-muted/50 rounded-full p-1">
+              <button className="bg-primary text-primary-foreground px-4 py-2 rounded-full font-medium text-sm transition-all hover:opacity-90">
+                To do <Badge variant="secondary" className="ml-1.5">6</Badge>
+              </button>
+              <button className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-full font-medium text-sm transition-colors hover:bg-background">
+                Comments <span className="ml-1">2</span>
+              </button>
+              <button className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-full font-medium text-sm transition-colors hover:bg-background">
+                Done <span className="ml-1">15</span>
+              </button>
+              <button className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-full font-medium text-sm transition-colors hover:bg-background">
+                Delegate <span className="ml-1">4</span>
+              </button>
             </div>
-          ))}
-        </div>
-      </div>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-2">
+            {[
+              { task: "Dribbble: Banking app shot", path: "Publications / Shots / Dribbble", id: "3/19", date: "July 22", color: "bg-card-yellow" },
+              { task: "Behance: Mobile delivery app", path: "Publications / Shots / Behance", id: "1/8", date: "July 24", color: "bg-card-pink" },
+              { task: "Event: User research methods", path: "Internal / Events / Design", id: "2/14", date: "July 26", color: "bg-card-green" },
+            ].map((item, i) => (
+              <div key={i} className={`flex items-center gap-4 p-4 rounded-xl ${item.color} hover:-translate-y-0.5 hover:shadow-sm transition-all cursor-pointer group`}>
+                <div className="flex-1">
+                  <p className="text-xs text-foreground/60 font-medium mb-1.5">{item.path}</p>
+                  <p className="text-sm font-bold text-foreground">{item.task}</p>
+                </div>
+                <div className="flex items-center gap-4 text-sm text-foreground/70">
+                  <span className="font-semibold bg-white/50 px-2 py-1 rounded-lg">{item.id}</span>
+                  <div className="flex -space-x-2">
+                    {["A", "B", "C"].slice(0, i + 2).map((letter, j) => (
+                      <div key={j} className="w-7 h-7 rounded-full bg-white/60 border-2 border-white flex items-center justify-center text-xs font-bold text-foreground shadow-sm hover:scale-110 hover:z-10 transition-transform">
+                        {letter}
+                      </div>
+                    ))}
+                    {i === 2 && <div className="w-7 h-7 rounded-full bg-white/40 border-2 border-white flex items-center justify-center text-xs font-bold shadow-sm hover:scale-110 hover:z-10 transition-transform">+3</div>}
+                  </div>
+                  <span className="font-medium">{item.date}</span>
+                  <button className="text-foreground/60 hover:text-foreground font-bold text-lg transition-colors">⋯</button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Productivity Info Card */}
-      <div className="bg-gradient-to-r from-chart-lavender/30 to-chart-blue/30 rounded-3xl p-6 border border-border/50">
-        <div className="flex items-start gap-4">
-          <div className="p-3 bg-background/50 rounded-2xl">
-            <Settings className="w-6 h-6 text-chart-lavender" />
+      <Card variant="lavender">
+        <CardContent className="p-6">
+          <div className="flex items-start gap-4">
+            <div className="p-3 bg-white/50 rounded-xl">
+              <Settings className="w-6 h-6 text-foreground" />
+            </div>
+            <div className="flex-1">
+              <h3 className="font-bold text-lg mb-1 text-foreground">How is productivity calculated?</h3>
+              <p className="text-sm text-foreground/70 leading-relaxed">
+                Your productivity score is based on how you categorize your time sessions. 
+                Mark sessions as <span className="text-chart-lime font-medium">Productive</span>, 
+                <span className="text-chart-amber font-medium"> Neutral</span>, or 
+                <span className="text-chart-peach font-medium"> Unproductive</span> when logging time. 
+                The score shows the percentage of productive hours vs total tracked time.
+              </p>
+              <Button variant="secondary" size="sm" className="mt-3" onClick={() => navigate("/settings")}>
+                Configure Productivity Rules
+              </Button>
+            </div>
           </div>
-          <div className="flex-1">
-            <h3 className="font-bold text-lg mb-1">How is productivity calculated?</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              Your productivity score is based on how you categorize your time sessions. 
-              Mark sessions as <span className="text-chart-lime font-medium">Productive</span>, 
-              <span className="text-chart-amber font-medium"> Neutral</span>, or 
-              <span className="text-chart-peach font-medium"> Unproductive</span> when logging time. 
-              The score shows the percentage of productive hours vs total tracked time.
-            </p>
-            <Button variant="outline" size="sm" className="mt-3 rounded-2xl" onClick={() => navigate("/settings")}>
-              Configure Productivity Rules
-            </Button>
-          </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }

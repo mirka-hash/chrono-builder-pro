@@ -1,4 +1,5 @@
 import { CheckCircle, MinusCircle, XCircle } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface ProductivityBreakdownProps {
   productive: { hours: number; sessions: number };
@@ -16,8 +17,8 @@ export function ProductivityBreakdown({ productive, neutral, unproductive }: Pro
       hours: productive.hours,
       sessions: productive.sessions,
       percentage: total > 0 ? (productive.hours / total) * 100 : 0,
-      color: "bg-chart-lime",
-      textColor: "text-chart-lime",
+      bgColor: "bg-card-green",
+      iconColor: "text-success",
     },
     {
       icon: MinusCircle,
@@ -25,8 +26,8 @@ export function ProductivityBreakdown({ productive, neutral, unproductive }: Pro
       hours: neutral.hours,
       sessions: neutral.sessions,
       percentage: total > 0 ? (neutral.hours / total) * 100 : 0,
-      color: "bg-chart-amber",
-      textColor: "text-chart-amber",
+      bgColor: "bg-card-yellow",
+      iconColor: "text-warning",
     },
     {
       icon: XCircle,
@@ -34,48 +35,52 @@ export function ProductivityBreakdown({ productive, neutral, unproductive }: Pro
       hours: unproductive.hours,
       sessions: unproductive.sessions,
       percentage: total > 0 ? (unproductive.hours / total) * 100 : 0,
-      color: "bg-chart-peach",
-      textColor: "text-chart-peach",
+      bgColor: "bg-card-pink",
+      iconColor: "text-destructive",
     },
   ];
 
   return (
-    <div className="bg-card rounded-3xl p-6 card-shadow card-hover">
-      <h3 className="text-lg font-bold mb-5">Productivity Breakdown</h3>
+    <Card variant="elevated">
+      <CardHeader className="pb-0">
+        <CardTitle className="text-lg">Productivity Breakdown</CardTitle>
+      </CardHeader>
 
-      {/* Stacked bar */}
-      <div className="h-4 flex rounded-full overflow-hidden mb-6">
-        {categories.map((cat, index) => (
-          <div
-            key={index}
-            className={`${cat.color} transition-all duration-500`}
-            style={{ width: `${cat.percentage}%` }}
-          />
-        ))}
-      </div>
+      <CardContent>
+        {/* Stacked bar */}
+        <div className="h-3 flex rounded-full overflow-hidden mb-5">
+          {categories.map((cat, index) => (
+            <div
+              key={index}
+              className={`${cat.bgColor} transition-all duration-500`}
+              style={{ width: `${cat.percentage}%` }}
+            />
+          ))}
+        </div>
 
-      <div className="space-y-4">
-        {categories.map((cat, index) => (
-          <div 
-            key={index} 
-            className="flex items-center justify-between p-3 rounded-2xl hover:bg-muted/40 transition-colors"
-          >
-            <div className="flex items-center gap-3">
-              <div className={`p-2 ${cat.color}/20 rounded-xl`}>
-                <cat.icon className={`w-5 h-5 ${cat.textColor}`} />
+        <div className="space-y-3">
+          {categories.map((cat, index) => (
+            <div 
+              key={index} 
+              className={`flex items-center justify-between p-3 rounded-xl ${cat.bgColor} transition-all hover:-translate-y-0.5 hover:shadow-sm`}
+            >
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-white/50 rounded-lg">
+                  <cat.icon className={`w-5 h-5 ${cat.iconColor}`} />
+                </div>
+                <div>
+                  <p className="font-semibold text-sm text-foreground">{cat.label}</p>
+                  <p className="text-xs text-foreground/60">{cat.sessions} sessions</p>
+                </div>
               </div>
-              <div>
-                <p className="font-semibold text-sm">{cat.label}</p>
-                <p className="text-xs text-muted-foreground">{cat.sessions} sessions</p>
+              <div className="text-right">
+                <p className="font-bold text-foreground">{cat.hours.toFixed(1)}h</p>
+                <p className="text-xs text-foreground/60">{cat.percentage.toFixed(0)}%</p>
               </div>
             </div>
-            <div className="text-right">
-              <p className="font-bold">{cat.hours.toFixed(1)}h</p>
-              <p className="text-xs text-muted-foreground">{cat.percentage.toFixed(0)}%</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
   );
 }
