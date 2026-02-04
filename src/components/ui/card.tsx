@@ -4,16 +4,23 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const cardVariants = cva(
-  "rounded-lg bg-card text-card-foreground",
+  "rounded-2xl text-card-foreground transition-all duration-200",
   {
     variants: {
       variant: {
-        default: "border-2 border-border shadow-[4px_4px_0_0_hsl(var(--border))]",
-        ghost: "border border-border/40",
-        flat: "border-2 border-border",
+        default: "bg-card border border-border/50 shadow-sm",
+        elevated: "bg-card border border-border/30 soft-shadow",
+        yellow: "bg-card-yellow border-0",
+        pink: "bg-card-pink border-0",
+        green: "bg-card-green border-0",
+        blue: "bg-card-blue border-0",
+        cream: "bg-card-cream border-0",
+        lavender: "bg-card-lavender border-0",
+        ghost: "bg-transparent border-0",
+        outline: "bg-transparent border border-border",
       },
       hover: {
-        true: "transition-all duration-100 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0_0_hsl(var(--border))] active:translate-x-0 active:translate-y-0 active:shadow-[2px_2px_0_0_hsl(var(--border))]",
+        true: "hover:-translate-y-0.5 hover:shadow-md cursor-pointer",
         false: "",
       },
     },
@@ -48,7 +55,7 @@ CardHeader.displayName = "CardHeader";
 
 const CardTitle = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLHeadingElement>>(
   ({ className, ...props }, ref) => (
-    <h3 ref={ref} className={cn("text-lg font-bold leading-none tracking-tight", className)} {...props} />
+    <h3 ref={ref} className={cn("text-lg font-semibold leading-none tracking-tight", className)} {...props} />
   ),
 );
 CardTitle.displayName = "CardTitle";

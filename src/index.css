@@ -3,129 +3,154 @@
 @tailwind utilities;
 
 /* 
-  PLAYFUL NEUBRUTALIST DESIGN SYSTEM
-  - Bold black borders
-  - Hard offset shadows (no blur)
-  - Vibrant saturated colors
-  - Sharp/rounded corners mix
+  INTELLY-INSPIRED DESIGN SYSTEM
+  - Warm cream background
+  - Dark sidebar with rounded corners
+  - Colorful pastel cards (pink, yellow, green, blue)
+  - Soft shadows, rounded corners
+  - Clean, modern aesthetic
   All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    --background: 40 40% 96%;
-    --foreground: 25 20% 15%;
+    /* Warm cream background */
+    --background: 45 35% 94%;
+    --foreground: 20 15% 15%;
 
-    --card: 40 30% 99%;
-    --card-foreground: 25 20% 15%;
+    /* White cards */
+    --card: 45 30% 99%;
+    --card-foreground: 20 15% 15%;
 
-    --popover: 40 30% 99%;
-    --popover-foreground: 25 20% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 15% 15%;
 
-    --primary: 25 20% 18%;
-    --primary-foreground: 40 30% 98%;
+    /* Dark primary for sidebar and buttons */
+    --primary: 20 10% 12%;
+    --primary-foreground: 45 30% 96%;
 
-    --secondary: 35 45% 88%;
-    --secondary-foreground: 25 20% 15%;
+    /* Light secondary */
+    --secondary: 45 25% 92%;
+    --secondary-foreground: 20 15% 15%;
 
-    --muted: 35 25% 90%;
-    --muted-foreground: 25 15% 45%;
+    /* Muted tones */
+    --muted: 45 20% 90%;
+    --muted-foreground: 20 10% 45%;
 
-    --accent: 320 35% 75%;
-    --accent-foreground: 320 40% 20%;
+    /* Pink accent */
+    --accent: 340 45% 85%;
+    --accent-foreground: 340 35% 25%;
 
-    --success: 155 40% 55%;
-    --success-foreground: 155 35% 15%;
+    /* Status colors - softer pastels */
+    --success: 145 35% 75%;
+    --success-foreground: 145 30% 20%;
 
-    --warning: 40 55% 65%;
-    --warning-foreground: 35 40% 15%;
+    --warning: 45 65% 80%;
+    --warning-foreground: 40 40% 20%;
 
-    --info: 200 45% 65%;
-    --info-foreground: 200 40% 15%;
+    --info: 200 45% 80%;
+    --info-foreground: 200 35% 20%;
 
-    --destructive: 5 55% 60%;
+    --destructive: 0 50% 70%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 25 20% 20%;
-    --input: 25 20% 20%;
-    --ring: 25 20% 20%;
+    /* Softer borders */
+    --border: 30 15% 80%;
+    --input: 30 15% 80%;
+    --ring: 20 10% 30%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
 
-    /* Warm pastel chart colors */
-    --chart-peach: 20 55% 78%;
-    --chart-lavender: 280 35% 80%;
-    --chart-lime: 95 40% 72%;
-    --chart-amber: 38 50% 72%;
-    --chart-blue: 200 40% 75%;
-    --chart-pink: 345 45% 78%;
+    /* Card color variants - inspired by reference */
+    --card-yellow: 48 70% 85%;
+    --card-pink: 340 50% 88%;
+    --card-green: 145 40% 82%;
+    --card-blue: 200 50% 85%;
+    --card-cream: 45 40% 92%;
+    --card-lavender: 280 40% 88%;
 
-    --widget-lime: 95 40% 70%;
-    --widget-pink: 345 40% 75%;
+    /* Chart colors - matching card colors */
+    --chart-peach: 20 55% 85%;
+    --chart-lavender: 280 40% 85%;
+    --chart-lime: 95 45% 78%;
+    --chart-amber: 45 60% 78%;
+    --chart-blue: 200 50% 80%;
+    --chart-pink: 340 50% 85%;
 
-    --sidebar-background: 40 30% 99%;
-    --sidebar-foreground: 25 20% 15%;
-    --sidebar-primary: 25 20% 18%;
-    --sidebar-primary-foreground: 40 30% 98%;
-    --sidebar-accent: 35 45% 88%;
-    --sidebar-accent-foreground: 25 20% 15%;
-    --sidebar-border: 25 20% 20%;
-    --sidebar-ring: 25 20% 20%;
+    --widget-lime: 95 45% 78%;
+    --widget-pink: 340 50% 85%;
+
+    /* Dark sidebar */
+    --sidebar-background: 20 10% 10%;
+    --sidebar-foreground: 45 30% 96%;
+    --sidebar-primary: 45 30% 96%;
+    --sidebar-primary-foreground: 20 10% 10%;
+    --sidebar-accent: 45 30% 96%;
+    --sidebar-accent-foreground: 20 10% 10%;
+    --sidebar-border: 20 10% 20%;
+    --sidebar-ring: 45 30% 96%;
   }
 
   .dark {
-    --background: 0 0% 8%;
-    --foreground: 0 0% 98%;
+    --background: 20 10% 8%;
+    --foreground: 45 20% 95%;
 
-    --card: 0 0% 12%;
-    --card-foreground: 0 0% 98%;
+    --card: 20 10% 12%;
+    --card-foreground: 45 20% 95%;
 
-    --popover: 0 0% 12%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 20 10% 12%;
+    --popover-foreground: 45 20% 95%;
 
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 8%;
+    --primary: 45 30% 96%;
+    --primary-foreground: 20 10% 10%;
 
-    --secondary: 45 80% 30%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 20 10% 18%;
+    --secondary-foreground: 45 20% 95%;
 
-    --muted: 0 0% 18%;
-    --muted-foreground: 0 0% 65%;
+    --muted: 20 10% 20%;
+    --muted-foreground: 45 15% 60%;
 
-    --accent: 280 75% 55%;
+    --accent: 340 50% 50%;
     --accent-foreground: 0 0% 100%;
 
-    --success: 140 65% 40%;
+    --success: 145 45% 45%;
     --success-foreground: 0 0% 100%;
 
-    --warning: 45 90% 50%;
-    --warning-foreground: 0 0% 5%;
+    --warning: 45 80% 55%;
+    --warning-foreground: 20 15% 10%;
 
-    --info: 200 90% 50%;
+    --info: 200 70% 55%;
     --info-foreground: 0 0% 100%;
 
-    --destructive: 0 80% 50%;
+    --destructive: 0 65% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 0 0% 90%;
+    --border: 20 10% 25%;
+    --input: 20 10% 25%;
+    --ring: 45 30% 80%;
 
-    --chart-peach: 15 90% 60%;
-    --chart-lavender: 270 75% 60%;
-    --chart-lime: 85 75% 50%;
-    --chart-amber: 40 90% 50%;
-    --chart-blue: 200 90% 55%;
-    --chart-pink: 330 80% 60%;
+    --card-yellow: 48 50% 30%;
+    --card-pink: 340 40% 30%;
+    --card-green: 145 35% 28%;
+    --card-blue: 200 40% 30%;
+    --card-cream: 45 20% 18%;
+    --card-lavender: 280 30% 30%;
 
-    --sidebar-background: 0 0% 8%;
-    --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 0 0% 98%;
-    --sidebar-primary-foreground: 0 0% 8%;
-    --sidebar-accent: 45 60% 25%;
-    --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 0 0% 90%;
-    --sidebar-ring: 0 0% 90%;
+    --chart-peach: 15 60% 55%;
+    --chart-lavender: 270 50% 55%;
+    --chart-lime: 85 55% 50%;
+    --chart-amber: 40 70% 55%;
+    --chart-blue: 200 60% 55%;
+    --chart-pink: 330 55% 55%;
+
+    --sidebar-background: 20 10% 6%;
+    --sidebar-foreground: 45 20% 95%;
+    --sidebar-primary: 45 20% 95%;
+    --sidebar-primary-foreground: 20 10% 6%;
+    --sidebar-accent: 20 10% 15%;
+    --sidebar-accent-foreground: 45 20% 95%;
+    --sidebar-border: 20 10% 15%;
+    --sidebar-ring: 45 20% 80%;
   }
 }
 
@@ -140,50 +165,77 @@
 }
 
 @layer utilities {
-  /* Neubrutalist shadow - hard offset, no blur */
+  /* Soft shadows - clean and modern */
+  .soft-shadow {
+    box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.08), 0 4px 16px -4px rgba(0, 0, 0, 0.06);
+  }
+
+  .soft-shadow-lg {
+    box-shadow: 0 4px 12px -3px rgba(0, 0, 0, 0.1), 0 8px 24px -6px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Hover lift effect - subtle and smooth */
+  .hover-lift {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px -4px rgba(0, 0, 0, 0.12), 0 12px 32px -8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Card color backgrounds */
+  .bg-card-yellow {
+    background-color: hsl(var(--card-yellow));
+  }
+
+  .bg-card-pink {
+    background-color: hsl(var(--card-pink));
+  }
+
+  .bg-card-green {
+    background-color: hsl(var(--card-green));
+  }
+
+  .bg-card-blue {
+    background-color: hsl(var(--card-blue));
+  }
+
+  .bg-card-cream {
+    background-color: hsl(var(--card-cream));
+  }
+
+  .bg-card-lavender {
+    background-color: hsl(var(--card-lavender));
+  }
+
+  /* Legacy aliases for compatibility */
   .neo-shadow {
-    box-shadow: 4px 4px 0 0 hsl(var(--border));
+    box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.08), 0 4px 16px -4px rgba(0, 0, 0, 0.06);
   }
 
   .neo-shadow-sm {
-    box-shadow: 2px 2px 0 0 hsl(var(--border));
+    box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.06);
   }
 
   .neo-shadow-lg {
-    box-shadow: 6px 6px 0 0 hsl(var(--border));
+    box-shadow: 0 4px 12px -3px rgba(0, 0, 0, 0.1), 0 8px 24px -6px rgba(0, 0, 0, 0.08);
   }
-  
-  /* Legacy aliases */
+
   .card-shadow {
-    box-shadow: 4px 4px 0 0 hsl(var(--border));
+    box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.08), 0 4px 16px -4px rgba(0, 0, 0, 0.06);
   }
-  
+
   .card-shadow-lg {
-    box-shadow: 6px 6px 0 0 hsl(var(--border));
+    box-shadow: 0 4px 12px -3px rgba(0, 0, 0, 0.1), 0 8px 24px -6px rgba(0, 0, 0, 0.08);
   }
 
-  /* Neubrutalist hover - pop effect */
-  .neo-hover {
-    transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
+  .neo-hover, .card-hover {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
-  .neo-hover:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0 0 hsl(var(--border));
-  }
-
-  .neo-hover:active {
-    transform: translate(0, 0);
-    box-shadow: 2px 2px 0 0 hsl(var(--border));
-  }
-
-  /* Legacy alias */
-  .card-hover {
-    transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
-  }
-
-  .card-hover:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0 0 hsl(var(--border));
+  .neo-hover:hover, .card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px -4px rgba(0, 0, 0, 0.12);
   }
 }

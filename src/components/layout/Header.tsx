@@ -1,30 +1,44 @@
-import { Bell, Search, User } from "lucide-react";
+import { Bell, Search, User, Settings } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 export function Header() {
   return (
-    <header className="h-16 border-b border-border/60 bg-card/80 backdrop-blur-sm flex items-center justify-between px-8 fixed top-0 right-0 left-64 z-10">
+    <header className="h-16 bg-transparent flex items-center justify-between px-8 fixed top-0 right-0 left-64 z-10">
+      {/* Search */}
       <div className="flex-1 max-w-xl">
         <div className="relative">
-          <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+          <div className="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-card-cream border border-border/50 flex items-center justify-center">
+            <Search className="w-4 h-4 text-muted-foreground" />
+          </div>
           <Input
             type="search"
-            placeholder="Search projects, clients, activities..."
-            className="pl-11 bg-background/50 border-border/60 rounded-2xl h-11 focus-visible:ring-2"
+            placeholder="Search"
+            className="pl-14 bg-card border-border/50 rounded-full h-11 focus-visible:ring-1"
           />
+          {/* Filter Pills */}
+          <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
+            <Badge variant="outline" className="text-[10px] py-0.5 px-2">Projects</Badge>
+            <Badge variant="outline" className="text-[10px] py-0.5 px-2">Clients</Badge>
+          </div>
         </div>
       </div>
 
+      {/* Right Actions */}
       <div className="flex items-center gap-2">
-        <Button variant="ghost" size="icon" className="relative rounded-2xl hover:bg-muted">
+        <Button variant="ghost" size="icon" className="relative rounded-full">
           <Bell className="w-5 h-5" />
           <span className="absolute top-2 right-2 w-2 h-2 bg-destructive rounded-full"></span>
         </Button>
         
-        <Button variant="ghost" size="icon" className="rounded-2xl hover:bg-muted">
-          <div className="w-9 h-9 bg-gradient-lavender rounded-2xl flex items-center justify-center shadow-sm">
-            <User className="w-5 h-5 text-primary" />
+        <Button variant="ghost" size="icon" className="rounded-full">
+          <Settings className="w-5 h-5" />
+        </Button>
+        
+        <Button variant="ghost" size="icon" className="rounded-full">
+          <div className="w-9 h-9 bg-card-lavender rounded-full flex items-center justify-center">
+            <User className="w-5 h-5 text-foreground" />
           </div>
         </Button>
       </div>
